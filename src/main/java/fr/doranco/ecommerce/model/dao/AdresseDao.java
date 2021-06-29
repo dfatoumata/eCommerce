@@ -2,7 +2,7 @@ package fr.doranco.ecommerce.model.dao;
 
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.Adresse;
+import fr.doranco.ecommerce.entity.pojo.Adresse;
 
 public class AdresseDao extends AbstractEntityFacade<Adresse> implements IAdresseDao {
 
