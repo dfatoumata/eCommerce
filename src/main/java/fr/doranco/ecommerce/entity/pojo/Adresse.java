@@ -2,16 +2,13 @@ package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -51,14 +48,9 @@ public class Adresse implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
-
-	@OneToOne
-	@JoinColumn(name = "adresse_facturation_id", nullable = false)
-	private Commande commande;
 	
 	
 	public Adresse() {
-
 	}
 
 	public Adresse(Integer numero, String rue, String ville, String codePostal) {

@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -20,8 +20,6 @@ import javax.validation.constraints.NotNull;
 public class ArticlePanier implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
-
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,21 +35,31 @@ public class ArticlePanier implements Serializable  {
 	@Column(name = "quantite", nullable = false)	
 	private Integer quantite;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
-	private Utilisateur utilisateur_id;
+	private Utilisateur utilisateur;
 
 	public ArticlePanier() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ArticlePanier(Integer id, Article article, @NotNull Integer quantite, Utilisateur utilisateur_id) {
+	public ArticlePanier(Article article, @NotNull Integer quantite) {
+		super();
+		this.article = article;
+		this.quantite = quantite;
+	}
+
+	public ArticlePanier(Integer id, Article article, @NotNull Integer quantite) {
 		super();
 		this.id = id;
 		this.article = article;
 		this.quantite = quantite;
-		this.utilisateur_id = utilisateur_id;
+	}
+
+	public ArticlePanier(Integer id, Article article, @NotNull Integer quantite, Utilisateur utilisateur) {
+		this.id = id;
+		this.article = article;
+		this.quantite = quantite;
+		this.utilisateur = utilisateur;
 	}
 
 	public Integer getId() {
@@ -78,18 +86,17 @@ public class ArticlePanier implements Serializable  {
 		this.quantite = quantite;
 	}
 
-	public Utilisateur getUtilisateur_id() {
-		return utilisateur_id;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setUtilisateur_id(Utilisateur utilisateur_id) {
-		this.utilisateur_id = utilisateur_id;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "ArticlePanier [id=" + id + ", article=" + article + ", quantite=" + quantite + "]";
 	}
-	
-	
 
 }

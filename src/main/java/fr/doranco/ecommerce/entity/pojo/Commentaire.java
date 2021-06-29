@@ -1,7 +1,6 @@
 package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,10 +17,6 @@ import javax.validation.constraints.NotNull;
 
 public class Commentaire  implements Serializable {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id	
@@ -33,7 +26,7 @@ public class Commentaire  implements Serializable {
 	
 	@NotNull
 	@Column(name = "texte", nullable = false)
-	private Integer texte ;
+	private String texte ;
 	
 	@NotNull
 	@Column(name = "note", nullable = false)
@@ -46,21 +39,25 @@ public class Commentaire  implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
+	
+	public Commentaire() {
+	}
 
-	public Commentaire(Integer id, @NotNull Integer texte, @NotNull Integer note, Utilisateur utilisateur ,Article article) {
-		super();
+	
+	public Commentaire(Integer id, @NotNull String texte, @NotNull Integer note) {
+		this.id = id;
+		this.texte = texte;
+		this.note = note;
+	}
+
+	public Commentaire(Integer id, @NotNull String texte, @NotNull Integer note, Utilisateur utilisateur ,Article article) {
 		this.id = id;
 		this.texte = texte;
 		this.note = note;
 		this.utilisateur = utilisateur;
-		this.article= article;
-		
+		this.article= article;		
 	}
 
-	public Commentaire() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public Integer getId() {
 		return id;
@@ -70,7 +67,7 @@ public class Commentaire  implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getTexte() {
+	public String getTexte() {
 		return texte;
 	}
 
@@ -82,7 +79,7 @@ public class Commentaire  implements Serializable {
 		this.article = article;
 	}
 
-	public void setTexte(Integer texte) {
+	public void setTexte(String texte) {
 		this.texte = texte;
 	}
 
@@ -100,6 +97,12 @@ public class Commentaire  implements Serializable {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Commentaire [id=" + id + ", texte=" + texte + ", note=" + note + "]";
 	}
 	
 	

@@ -84,9 +84,21 @@ public class Utilisateur implements Serializable {
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Commande> commandes;
 	
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<CartePaiement> cartePaiements ;
+	
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<ArticlePanier> articlePaniers ;
+	
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Commentaire> commentaires  ;
+	
 	public Utilisateur() {
 		adresses = new HashSet<Adresse>();
 		commandes = new HashSet<Commande>();
+		cartePaiements = new HashSet<CartePaiement>();
+		articlePaniers = new HashSet<ArticlePanier>();
+		commentaires = new HashSet<Commentaire>();
 	}
 	
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
@@ -102,6 +114,9 @@ public class Utilisateur implements Serializable {
 		this.password = password;
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
+		cartePaiements = new HashSet<CartePaiement>();
+		articlePaniers = new HashSet<ArticlePanier>();
+		commentaires = new HashSet<Commentaire>();
 	}
 
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
@@ -118,6 +133,10 @@ public class Utilisateur implements Serializable {
 		this.telephone = telephone;
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
+		cartePaiements = new HashSet<CartePaiement>();
+		articlePaniers = new HashSet<ArticlePanier>();
+		commentaires = new HashSet<Commentaire>();
+		
 	}
 
 	public Utilisateur(Integer id, @NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
@@ -135,10 +154,11 @@ public class Utilisateur implements Serializable {
 		this.telephone = telephone;
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
-	}
+		cartePaiements = new HashSet<CartePaiement>();
+		articlePaniers = new HashSet<ArticlePanier>();
+		commentaires = new HashSet<Commentaire>();
 
-	
-	
+	}
 	
 	public Integer getId() {
 		return id;
@@ -170,6 +190,14 @@ public class Utilisateur implements Serializable {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	
+	public Boolean getIsActif() {
+		return isActif;
+	}
+
+	public void setIsActif(Boolean isActif) {
+		this.isActif = isActif;
 	}
 
 	public String getEmail() {
@@ -220,18 +248,15 @@ public class Utilisateur implements Serializable {
 		return commandes;
 	}
 
-	public Boolean getIsActif() {
-		return isActif;
+
+	public Set<CartePaiement> getCartePaiements() {
+		return cartePaiements;
 	}
 
-	public void setIsActif(Boolean isActif) {
-		this.isActif = isActif;
+	public Set<ArticlePanier> getArticlePaniers() {
+		return articlePaniers;
 	}
 
-	
-	
-	
-	
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="

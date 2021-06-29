@@ -20,11 +20,6 @@ import javax.validation.constraints.NotEmpty;
 
 public class Categorie  implements Serializable  {
 
-	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,7 +31,6 @@ public class Categorie  implements Serializable  {
 	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
 	
-	
 	@NotEmpty
 	@Column(name = "remise", length = 3, nullable = false)
 	private Integer remise;
@@ -44,20 +38,33 @@ public class Categorie  implements Serializable  {
 	@OneToMany(mappedBy = "categorie", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Article> articles;
 
-	public Categorie(Integer id, @NotEmpty String nom, @NotEmpty Integer remise) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.remise = remise;
-		
+	
+	
+	public Categorie() {
 		articles = new HashSet<Article>();
 	}
 
-	public Categorie() {
+	public Categorie(@NotEmpty String nom, @NotEmpty Integer remise) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.nom = nom;
+		this.remise = remise;
 		articles = new HashSet<Article>();
+	}
+	
+	public Categorie(Integer id, @NotEmpty String nom, @NotEmpty Integer remise) {
+		this.id = id;
+		this.nom = nom;
+		this.remise = remise;	
+		articles = new HashSet<Article>();
+	}
 
+	
+	public Categorie(Integer id, @NotEmpty String nom, @NotEmpty Integer remise, Set<Article> articles) {
+		this.id = id;
+		this.nom = nom;
+		this.remise = remise;
+		this.articles = articles;
+		articles = new HashSet<Article>();
 	}
 
 	public Integer getId() {

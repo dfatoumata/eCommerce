@@ -1,7 +1,7 @@
 package fr.doranco.ecommerce.entity.pojo;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -22,20 +21,9 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "article", catalog = "ecommerce_db_hibernate")
 
 public class Article  implements Serializable  {
-	
-	/*id
-nom
-description
-prix
-remise (en %)
-stock
-isVendable (ne se vend
-plus ou non)
-photos
-video
-commentaires */
-	
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -53,7 +41,7 @@ commentaires */
 
 	@NotEmpty
 	@Column(name = "prix", length = 4, nullable = false)
-	private float prix;
+	private Double prix;
 	
 	@NotEmpty
 	@Column(name = "remise", length = 3, nullable = false)
@@ -64,28 +52,52 @@ commentaires */
 	private Integer stock;
 	
 	@NotEmpty
-	@Column(name = "isVendable", length = 1, nullable = false)
-	private boolean isVendable;
-	
-	
-	@NotEmpty
-	@Column(name = "photos", length = 10, nullable = false)
-	private BufferedImage  photos;
- 
-	
+	@Column(name = "isVendable", nullable = false)
+	private Boolean isVendable;
+
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Commentaire> commentaires;
 	
 	@ManyToOne
 	@JoinColumn(name = "categorie_id", nullable = false)
 	private Categorie categorie;
-	
-	@OneToOne
-	private Article article;
 
-	public Article(Integer id, @NotEmpty String nom, @NotEmpty String description, @NotEmpty float prix,
-			@NotEmpty Integer remise, @NotEmpty Integer stock, @NotEmpty boolean isVendable,
-			@NotEmpty BufferedImage photos, Set<Commentaire> commentaires, Categorie categorie, Article article) {
+
+	public Article() {
+		commentaires = new HashSet<Commentaire>();
+	}
+
+	
+	public Article(@NotEmpty String nom, @NotEmpty String description, @NotEmpty Double prix, @NotEmpty Integer remise,
+			@NotEmpty Integer stock, @NotEmpty Boolean isVendable) {
+		this.nom = nom;
+		this.description = description;
+		this.prix = prix;
+		this.remise = remise;
+		this.stock = stock;
+		this.isVendable = isVendable;
+		commentaires = new HashSet<Commentaire>();
+
+	}
+
+	public Article(Integer id, @NotEmpty String nom, @NotEmpty String description, @NotEmpty Double prix,
+			@NotEmpty Integer remise, @NotEmpty Integer stock, @NotEmpty Boolean isVendable) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.description = description;
+		this.prix = prix;
+		this.remise = remise;
+		this.stock = stock;
+		this.isVendable = isVendable;		
+		commentaires = new HashSet<Commentaire>();
+
+	}
+
+
+	public Article(Integer id, @NotEmpty String nom, @NotEmpty String description, @NotEmpty Double prix,
+			@NotEmpty Integer remise, @NotEmpty Integer stock, @NotEmpty Boolean isVendable,
+			Set<Commentaire> commentaires, Categorie categorie) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -94,16 +106,12 @@ commentaires */
 		this.remise = remise;
 		this.stock = stock;
 		this.isVendable = isVendable;
-		this.photos = photos;
 		this.commentaires = commentaires;
 		this.categorie = categorie;
-		this.article = article;
+		commentaires = new HashSet<Commentaire>();
+
 	}
 
-	public Article() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public Integer getId() {
 		return id;
@@ -129,13 +137,6 @@ commentaires */
 		this.description = description;
 	}
 
-	public float getPrix() {
-		return prix;
-	}
-
-	public void setPrix(float prix) {
-		this.prix = prix;
-	}
 
 	public Integer getRemise() {
 		return remise;
@@ -161,21 +162,11 @@ commentaires */
 		this.isVendable = isVendable;
 	}
 
-	public BufferedImage getPhotos() {
-		return photos;
-	}
-
-	public void setPhotos(BufferedImage photos) {
-		this.photos = photos;
-	}
 
 	public Set<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(Set<Commentaire> commentaires) {
-		this.commentaires = commentaires;
-	}
 
 	public Categorie getCategorie() {
 		return categorie;
@@ -185,14 +176,26 @@ commentaires */
 		this.categorie = categorie;
 	}
 
-	public Article getArticle() {
-		return article;
+
+	public Double getPrix() {
+		return prix;
 	}
 
-	public void setArticle(Article article) {
-		this.article = article;
+
+	public void setPrix(Double prix) {
+		this.prix = prix;
 	}
-	
+
+
+	public Boolean getIsVendable() {
+		return isVendable;
+	}
+
+
+	public void setIsVendable(Boolean isVendable) {
+		this.isVendable = isVendable;
+	}
+
 
 	
 

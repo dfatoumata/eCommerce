@@ -17,13 +17,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "CartePaiement", catalog = "ecommerce_db_hibernate")
+@Table(name = "carte_paiement", catalog = "ecommerce_db_hibernate")
 public class CartePaiement implements Serializable {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,11 +28,11 @@ public class CartePaiement implements Serializable {
 	private Integer id;
 	
 	@NotEmpty
-	@Column(name = "nomProprietaire", length = 25, nullable = false)
+	@Column(name = "nom_proprietaire", length = 25, nullable = false)
 	private String nomProprietaire;
 	
 	@NotEmpty
-	@Column(name = "prenomProprietaire", length = 25, nullable = false)
+	@Column(name = "prenom_proprietaire", length = 25, nullable = false)
 	private String prenomProprietaire;
 	
 	@NotEmpty
@@ -44,7 +40,7 @@ public class CartePaiement implements Serializable {
 	private Integer numero;
 
 	@NotNull
-	@Column(name = "dateFinValidite", nullable = false)
+	@Column(name = "date_Fin_Validite", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateFinValidite;
 	
@@ -55,11 +51,13 @@ public class CartePaiement implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
+	
+	public CartePaiement() {
+	}
 
 	public CartePaiement(Integer id, @NotEmpty String nomProprietaire, @NotEmpty String prenomProprietaire,
 			@NotEmpty Integer numero, @NotNull Date dateFinValidite, @NotEmpty String cryptogramme,
 			Utilisateur utilisateur) {
-		super();
 		this.id = id;
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
@@ -67,10 +65,6 @@ public class CartePaiement implements Serializable {
 		this.dateFinValidite = dateFinValidite;
 		this.cryptogramme = cryptogramme;
 		this.utilisateur = utilisateur;
-	}
-
-	public CartePaiement() {
-
 	}
 
 	public Integer getId() {

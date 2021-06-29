@@ -1,9 +1,9 @@
 package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -65,29 +65,70 @@ public class Commande implements Serializable {
 	@Column(name = "total_general", nullable = false)
 	private double totalGeneral ;
 	
+	
+	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="adresse_facturation_id")
+    @JoinColumn(name="adresse_facturation_id", nullable = false)
 	private Adresse adresseFacturation;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="adresse_livraison_id")
+    @JoinColumn(name="adresse_livraison_id", nullable = false)
 	private Adresse adresseLivraison;	
+	
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="carte_paiement_id", nullable = false)
+	private CartePaiement cartePaiementDefaut;
 	
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "commande", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<LigneCommande> lignesCommande;
+	private Set<LigneCommande> lignesCommande;
 	
 	public Commande() {
-		this.lignesCommande = new ArrayList<LigneCommande>();
+		this.lignesCommande = new HashSet<LigneCommande>();
+	}
+
+	public Commande(@NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
+			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral) {
+		this.numero = numero;
+		this.dateCreation = dateCreation;
+		this.dateLivraison = dateLivraison;
+		this.totalRemise = totalRemise;
+		this.fraisExpedition = fraisExpedition;
+		this.totalGeneral = totalGeneral;
 	}
 	
 
-	
-	
-	
+	public Commande(Integer id, @NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
+			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral) {
+		this.id = id;
+		this.numero = numero;
+		this.dateCreation = dateCreation;
+		this.dateLivraison = dateLivraison;
+		this.totalRemise = totalRemise;
+		this.fraisExpedition = fraisExpedition;
+		this.totalGeneral = totalGeneral;
+	}
+
+	public Commande(Integer id, @NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
+			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral,
+			Adresse adresseFacturation, Adresse adresseLivraison, CartePaiement cartePaiementDefaut,
+			Utilisateur utilisateur) {
+		this.id = id;
+		this.numero = numero;
+		this.dateCreation = dateCreation;
+		this.dateLivraison = dateLivraison;
+		this.totalRemise = totalRemise;
+		this.fraisExpedition = fraisExpedition;
+		this.totalGeneral = totalGeneral;
+		this.adresseFacturation = adresseFacturation;
+		this.adresseLivraison = adresseLivraison;
+		this.cartePaiementDefaut = cartePaiementDefaut;
+		this.utilisateur = utilisateur;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -103,8 +144,6 @@ public class Commande implements Serializable {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-
-
 
 	public Date getDateLivraison() {
 		return dateLivraison;
@@ -123,8 +162,53 @@ public class Commande implements Serializable {
 		this.utilisateur = utilisateur;
 	}
 
-	public List<LigneCommande> getLignesCommande() {
+	public Set<LigneCommande> getLignesCommande() {
 		return lignesCommande;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public double getTotalRemise() {
+		return totalRemise;
+	}
+
+	public void setTotalRemise(double totalRemise) {
+		this.totalRemise = totalRemise;
+	}
+
+	public double getFraisExpedition() {
+		return fraisExpedition;
+	}
+
+
+	public void setFraisExpedition(double fraisExpedition) {
+		this.fraisExpedition = fraisExpedition;
+	}
+
+	public double getTotalGeneral() {
+		return totalGeneral;
+	}
+
+	public void setTotalGeneral(double totalGeneral) {
+		this.totalGeneral = totalGeneral;
+	}
+
+	public Adresse getAdresseFacturation() {
+		return adresseFacturation;
+	}
+
+	public Adresse getAdresseLivraison() {
+		return adresseLivraison;
+	}
+
+	public CartePaiement getCartePaiementDefaut() {
+		return cartePaiementDefaut;
 	}
 
 
