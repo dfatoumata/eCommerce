@@ -74,9 +74,17 @@ public class Utilisateur implements Serializable {
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Commande> commandes;
 	
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<CartePaiement> cartePaiements;
+	
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Commentaire> commentaires;
+	
 	public Utilisateur() {
 		adresses = new HashSet<Adresse>();
 		commandes = new HashSet<Commande>();
+		cartePaiements = new HashSet<CartePaiement>();
+		commentaires = new HashSet<Commentaire>();
 	}
 
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom, @NotEmpty String email,
@@ -92,6 +100,8 @@ public class Utilisateur implements Serializable {
 		this.profil = profil;
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
+		cartePaiements = new HashSet<CartePaiement>();
+		commentaires = new HashSet<Commentaire>();
 	}
 
 	public Integer getId() {
@@ -172,6 +182,18 @@ public class Utilisateur implements Serializable {
 
 	public Set<Commande> getCommandes() {
 		return commandes;
+	}
+
+	public Set<CartePaiement> getCartePaiements() {
+		return cartePaiements;
+	}
+
+	public Set<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(Set<Commentaire> commentaires) {
+		this.commentaires = commentaires;
 	}
 
 	@Override

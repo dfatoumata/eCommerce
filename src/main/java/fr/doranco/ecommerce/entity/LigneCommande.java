@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -41,18 +42,32 @@ public class LigneCommande implements Serializable {
 	@JoinColumn(name = "commande_id", nullable = false)
 	private Commande commande;
 	
+	@OneToOne
+	@JoinColumn(name = "article_id", nullable = false)
+	private Article article;
+	
 	public LigneCommande() {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected LigneCommande(String titreArticle, Integer prixArticle, Integer quantite) {
+	protected LigneCommande(String titreArticle, Integer prixArticle, Integer quantite,Article article) {
 		this.titreArticle = titreArticle;
 		this.prixArticle = prixArticle;
 		this.quantite = quantite;
+		this.article = article;
 	}
 
 	public Integer getId() {
 		return id;
+	}
+	
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 	public void setId(Integer id) {
