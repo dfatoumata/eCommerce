@@ -22,7 +22,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "utilisateur", catalog = "hibernate_db_anot")
+@Table(name = "utilisateur", catalog = "ecommerce_db_hibernate")
 @NamedQueries({
 	@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
 	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE email =: email")

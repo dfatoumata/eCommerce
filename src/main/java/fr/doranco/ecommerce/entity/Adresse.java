@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "adresse", catalog = "hibernate_db_anot")
+@Table(name = "adresse", catalog = "ecommerce_db_hibernate")
 public class Adresse implements Serializable {
 
 	private static final long serialVersionUID = 1L;

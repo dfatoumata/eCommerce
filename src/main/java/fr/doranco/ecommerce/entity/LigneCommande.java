@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "ligneCommande", catalog = "hibernate_db_anot")
+@Table(name = "ligneCommande", catalog = "ecommerce_db_hibernate")
 
 public class LigneCommande implements Serializable {
 

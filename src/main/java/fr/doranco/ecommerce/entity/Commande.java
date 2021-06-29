@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "commande", catalog = "hibernate_db_anot")
+@Table(name = "commande", catalog = "ecommerce_db_hibernate")
 @NamedQueries({
 	@NamedQuery(name = "Commande.findAll", query = "SELECT c FROM Commande c"),
 	@NamedQuery(name = "Commande.findById", query = "SELECT c FROM Commande c WHERE id =:id")
