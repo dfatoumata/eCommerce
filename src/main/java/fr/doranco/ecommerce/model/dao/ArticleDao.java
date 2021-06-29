@@ -17,4 +17,7 @@ public class ArticleDao extends AbstractEntityFacade<Utilisateur> implements IAr
 		return null;
 	}
 
+
+	
+	
 }
