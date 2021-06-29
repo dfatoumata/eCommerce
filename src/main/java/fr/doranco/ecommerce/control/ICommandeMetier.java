@@ -8,4 +8,5 @@ public interface ICommandeMetier {
 	Commande getCommandeById(Integer id) throws Exception;
 	void updateCommande(Commande commande) throws Exception;
 	void removeCommande(Commande commande) throws Exception;
+	//test
 }
