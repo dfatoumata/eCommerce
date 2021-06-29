@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
