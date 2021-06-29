@@ -55,20 +55,20 @@ public class Commande implements Serializable {
 
 	@NotNull
 	@Column(name = "total_remise", nullable = false)
-	private double totalRemise ;
+	private Double totalRemise ;
 	
 	@NotNull
 	@Column(name = "frais_expedition", nullable = false)
-	private double fraisExpedition ;
+	private Double fraisExpedition ;
 	
 	@NotNull
 	@Column(name = "total_general", nullable = false)
-	private double totalGeneral ;
+	private Double totalGeneral ;
 	
 	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="adresse_facturation_id", nullable = false)
+    @JoinColumn(name="adresse_facturation_id", nullable = false )
 	private Adresse adresseFacturation;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -91,7 +91,7 @@ public class Commande implements Serializable {
 	}
 
 	public Commande(@NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
-			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral) {
+			@NotNull Double totalRemise, @NotNull Double fraisExpedition, @NotNull Double totalGeneral) {
 		this.numero = numero;
 		this.dateCreation = dateCreation;
 		this.dateLivraison = dateLivraison;
@@ -104,7 +104,7 @@ public class Commande implements Serializable {
 	
 
 	public Commande(Integer id, @NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
-			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral) {
+			@NotNull Double totalRemise, @NotNull Double fraisExpedition, @NotNull Double totalGeneral) {
 		this.id = id;
 		this.numero = numero;
 		this.dateCreation = dateCreation;
@@ -117,7 +117,7 @@ public class Commande implements Serializable {
 	}
 
 	public Commande(Integer id, @NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
-			@NotNull double totalRemise, @NotNull double fraisExpedition, @NotNull double totalGeneral,
+			@NotNull Double totalRemise, @NotNull Double fraisExpedition, @NotNull Double totalGeneral,
 			Adresse adresseFacturation, Adresse adresseLivraison, CartePaiement cartePaiementDefaut,
 			Utilisateur utilisateur) {
 		this.id = id;

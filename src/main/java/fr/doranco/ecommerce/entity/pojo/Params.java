@@ -44,7 +44,7 @@ public class Params implements Serializable {
 		super();
 		this.id = id;
 		this.cleCrypatage = cleCrypatage;
-	
+	}
 
 
 	public Integer getId() {

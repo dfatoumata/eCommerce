@@ -6,10 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.hibernate.Session;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-
-import com.fasterxml.classmate.GenericType;
 
 import fr.doranco.ecommerce.entity.pojo.Commande;
 import fr.doranco.ecommerce.model.HibernateConnector;

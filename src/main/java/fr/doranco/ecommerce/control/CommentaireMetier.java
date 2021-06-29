@@ -1,6 +1,7 @@
 package fr.doranco.ecommerce.control;
 
 import fr.doranco.ecommerce.entity.pojo.Commentaire;
+import fr.doranco.ecommerce.model.dao.CommentaireDao;
 import fr.doranco.ecommerce.model.dao.ICommentaireDao;
 
 public class CommentaireMetier implements ICommentaireMetier {

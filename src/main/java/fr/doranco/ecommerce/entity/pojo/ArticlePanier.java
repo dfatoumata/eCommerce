@@ -15,8 +15,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "ligneCommande", catalog = "ecommerce_db")
-
+@Table(name = "articlePanier", catalog = "ecommerce_db")
 public class ArticlePanier implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
