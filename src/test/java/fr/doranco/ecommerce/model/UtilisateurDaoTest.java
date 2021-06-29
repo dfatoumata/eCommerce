@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.doranco.ecommerce.entity.Utilisateur;
+import fr.doranco.ecommerce.entity.dto.Utilisateur;
 import fr.doranco.ecommerce.enums.Genre;
 import fr.doranco.ecommerce.enums.TypeUtilisateur;
 import fr.doranco.ecommerce.model.dao.IUtilisateurDao;

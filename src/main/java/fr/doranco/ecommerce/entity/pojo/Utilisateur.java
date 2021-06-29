@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,10 +22,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "utilisateur", catalog = "ecommerce_db_hibernate")
+@Table(name = "utilisateur", catalog = "ecommerce_db")
 @NamedQueries({
-	@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE email =: email")
+	@NamedQuery(name = "User.findAll", query = "SELECT u FROM Utilisateur u"),
+	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM Utilisateur u WHERE u.email =: email")
 })
 public class Utilisateur implements Serializable {
 
@@ -39,6 +39,7 @@ public class Utilisateur implements Serializable {
 	@NotEmpty
 	@Column(name = "genre", length = 25, nullable = false)
 	private String genre;
+	
 	@NotEmpty
 	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
@@ -46,26 +47,35 @@ public class Utilisateur implements Serializable {
 	@NotEmpty
 	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
-	@NotEmpty
-	@Column(name = "email", length = 40, nullable = false, unique = true)
-	private String email;
-	
-	@NotEmpty
-	@Column(name = "password", length = 40, nullable = false)
-	private String password;
-	
-	@NotEmpty
-	@Column(name = "telephone", length = 40)	
-	private String telephone;
-	
+
 	@NotNull
 	@Column(name = "date_naissance", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 
+	@NotNull
+	@Column(name = "isActif", nullable = false)	
+	private Boolean isActif;
+	
+	@NotNull
 	@NotEmpty
 	@Column(name = "profil", length = 1, nullable = false)	
 	private String profil;
+
+	@NotNull
+	@NotEmpty
+	@Column(name = "email", length = 40, nullable = false, unique = true)
+	private String email;
+	
+	@NotNull
+	@NotEmpty
+	@Column(name = "password", length = 40, nullable = false)
+	private String password;
+	
+	@Column(name = "telephone", length = 40)	
+	private String telephone;
+
+	
 	
 	
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -78,22 +88,58 @@ public class Utilisateur implements Serializable {
 		adresses = new HashSet<Adresse>();
 		commandes = new HashSet<Commande>();
 	}
-
-	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom, @NotEmpty String email,
-			@NotEmpty String password, @NotEmpty String telephone, @NotNull Date dateNaissance,
-			@NotEmpty String profil) {
+	
+	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
+			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
+			@NotEmpty String password) {
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.isActif = isActif;
+		this.profil = profil;
 		this.email = email;
 		this.password = password;
-		this.telephone = telephone;
-		this.dateNaissance = dateNaissance;
-		this.profil = profil;
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
 	}
 
+	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
+			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
+			@NotEmpty String password, String telephone) {
+		this.genre = genre;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.isActif = isActif;
+		this.profil = profil;
+		this.email = email;
+		this.password = password;
+		this.telephone = telephone;
+		adresses = new HashSet<Adresse>();	
+		commandes = new HashSet<Commande>();
+	}
+
+	public Utilisateur(Integer id, @NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
+			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
+			@NotEmpty String password, String telephone) {
+		this.id = id;
+		this.genre = genre;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.isActif = isActif;
+		this.profil = profil;
+		this.email = email;
+		this.password = password;
+		this.telephone = telephone;
+		adresses = new HashSet<Adresse>();	
+		commandes = new HashSet<Commande>();
+	}
+
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -174,12 +220,25 @@ public class Utilisateur implements Serializable {
 		return commandes;
 	}
 
+	public Boolean getIsActif() {
+		return isActif;
+	}
+
+	public void setIsActif(Boolean isActif) {
+		this.isActif = isActif;
+	}
+
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email
-				+ ", password=" + password + ", telephone=" + telephone + ", dateNaissance=" + dateNaissance
-				+ ", profil=" + profil + "]";
+		return "Utilisateur [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
+				+ dateNaissance + ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password="
+				+ password + ", telephone=" + telephone + "]";
 	}
+
 
 
 

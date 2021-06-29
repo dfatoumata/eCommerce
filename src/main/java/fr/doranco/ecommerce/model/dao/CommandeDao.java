@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.Commande;
+import fr.doranco.ecommerce.entity.pojo.Commande;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class CommandeDao extends AbstractEntityFacade<Commande> implements ICommandeDao {

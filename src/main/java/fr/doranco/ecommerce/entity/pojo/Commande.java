@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,10 +25,10 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "commande", catalog = "ecommerce_db_hibernate")
+@Table(name = "commande", catalog = "ecommerce_db")
 @NamedQueries({
-	@NamedQuery(name = "Commande.findAll", query = "SELECT c FROM Commande c"),
-	@NamedQuery(name = "Commande.findById", query = "SELECT c FROM Commande c WHERE id =:id")
+	@NamedQuery(name = "Commande.findAll", query = "FROM Commande c"),
+	@NamedQuery(name = "Commande.findById", query = "FROM Commande c WHERE c.id =:id")
 })
 public class Commande implements Serializable {
 
@@ -43,14 +44,34 @@ public class Commande implements Serializable {
 	private Integer numero ;
 	
 	@NotNull
-	@Column(name = "date_commande", nullable = false)
+	@Column(name = "date_creation", nullable = false)
 	@Temporal(TemporalType.DATE)
-	private Date dateCommande ;
+	private Date dateCreation ;
 	
 	@NotNull
 	@Column(name = "date_livraison", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateLivraison ;
+
+	@NotNull
+	@Column(name = "total_remise", nullable = false)
+	private double totalRemise ;
+	
+	@NotNull
+	@Column(name = "frais_expedition", nullable = false)
+	private double fraisExpedition ;
+	
+	@NotNull
+	@Column(name = "total_general", nullable = false)
+	private double totalGeneral ;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="adresse_facturation_id")
+	private Adresse adresseFacturation;	
+	
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="adresse_livraison_id")
+	private Adresse adresseLivraison;	
 	
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
@@ -63,13 +84,10 @@ public class Commande implements Serializable {
 		this.lignesCommande = new ArrayList<LigneCommande>();
 	}
 	
-	public Commande(Integer numero, Date dateCommande, Date dateLivraison) {
-		this.numero = numero;
-		this.dateCommande = dateCommande;
-		this.dateLivraison = dateLivraison;
-		this.lignesCommande = new ArrayList<LigneCommande>();
-	}
 
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -86,13 +104,7 @@ public class Commande implements Serializable {
 		this.numero = numero;
 	}
 
-	public Date getDateCommande() {
-		return dateCommande;
-	}
 
-	public void setDateCommande(Date dateCommande) {
-		this.dateCommande = dateCommande;
-	}
 
 	public Date getDateLivraison() {
 		return dateLivraison;
@@ -115,11 +127,6 @@ public class Commande implements Serializable {
 		return lignesCommande;
 	}
 
-	@Override
-	public String toString() {
-		return "Commande [id=" + id + ", numero=" + numero + ", dateCommande=" + dateCommande + ", dateLivraison="
-				+ dateLivraison + "]";
-	}
-	
+
 	
 }

@@ -3,7 +3,7 @@ package fr.doranco.ecommerce.model.dao;
 import java.util.List;
 import java.util.Map;
 
-import fr.doranco.ecommerce.entity.Utilisateur;
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 
 public interface IArticleDao extends IEntityFacade<Utilisateur> {
 
