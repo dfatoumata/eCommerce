@@ -46,7 +46,6 @@ public class LigneCommande implements Serializable {
 	}
 
 	protected LigneCommande(String titreArticle, Integer prixArticle, Integer quantite) {
-		super();
 		this.titreArticle = titreArticle;
 		this.prixArticle = prixArticle;
 		this.quantite = quantite;

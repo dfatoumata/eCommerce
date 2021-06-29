@@ -71,9 +71,12 @@ public class Utilisateur implements Serializable {
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Adresse> adresses;
 
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<Commande> commandes;
 	
 	public Utilisateur() {
 		adresses = new HashSet<Adresse>();
+		commandes = new HashSet<Commande>();
 	}
 
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom, @NotEmpty String email,
@@ -87,7 +90,8 @@ public class Utilisateur implements Serializable {
 		this.telephone = telephone;
 		this.dateNaissance = dateNaissance;
 		this.profil = profil;
-		adresses = new HashSet<Adresse>();		
+		adresses = new HashSet<Adresse>();	
+		commandes = new HashSet<Commande>();
 	}
 
 	public Integer getId() {
@@ -164,6 +168,10 @@ public class Utilisateur implements Serializable {
 
 	public Set<Adresse> getAdresses() {
 		return adresses;
+	}
+
+	public Set<Commande> getCommandes() {
+		return commandes;
 	}
 
 	@Override

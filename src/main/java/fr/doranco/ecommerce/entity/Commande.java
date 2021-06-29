@@ -53,7 +53,7 @@ public class Commande implements Serializable {
 	private Date dateLivraison ;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
 	
 	@OneToMany(mappedBy = "commande", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
