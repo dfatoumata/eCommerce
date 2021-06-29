@@ -1,21 +1,30 @@
 package fr.doranco.ecommerce.model.dao;
 
-import java.util.Set;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class AdresseDao extends AbstractEntityFacade<Adresse> implements IAdresseDao {
 
 	@Override
-	public Set<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception {
+		Session session = HibernateConnector.getInstance().getSession();
+		Query<Adresse> query = session.createQuery("SELECT a FROM Utilisateur u JOIN  u.adresses a  WHERE u.id =:id",
+				Adresse.class);
+		query.setParameter("id", idUtilisateur);
+		return query.getResultList();
 	}
 
 	@Override
-	public Set<String> getNomsVillesUtilisateurs() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getNomsVillesUtilisateurs() throws Exception {
+		Session session = HibernateConnector.getInstance().getSession();
+		Query<String> query = session.createQuery("SELECT a.ville FROM Utilisateur u JOIN  u.adresses a  WHERE u.id =:id",
+				String.class);
+		return query.getResultList();
 	}
 
 
