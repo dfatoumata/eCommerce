@@ -9,42 +9,44 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import com.fasterxml.classmate.GenericType;
+
 import fr.doranco.ecommerce.entity.pojo.Commande;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class CommandeDao extends AbstractEntityFacade<Commande> implements ICommandeDao {
 
-	@Override
-	public List<Commande> getListeCommandes1() {
-		Session session = HibernateConnector.getInstance().getSession();
-		String requette = "SELECT c FROM Commande c";
-		Query<Commande> query = session.createQuery(requette, Commande.class);
-		return query.list();
-	}
-
-	@Override
-	public List<Commande> getListeCommandes2() {
-		Session session = HibernateConnector.getInstance().getSession();
-		Query<Commande> query = session.createNamedQuery("Commande.findAll", Commande.class);
-		return query.list();
-	}
-
-	@Override
-	public List<Commande> getListeCommandes3() {
-		Session session = HibernateConnector.getInstance().getSession();
-		String requette = "SELECT * FROM commande";
-		NativeQuery<Commande> query = session.createNativeQuery(requette, Commande.class);
-		return query.list();
-	}
-
-	@Override
-	public List<Commande> getListeCommandesById(Integer id) {
-		Session session = HibernateConnector.getInstance().getSession();
-		Query<Commande> query = session.createNamedQuery("Commande.findById", Commande.class);
-		query.setParameter("id", id);
-		return query.getResultList();
-	}
-
+//	@Override
+//	public List<Commande> getListeCommandes1() {
+//		Session session = HibernateConnector.getInstance().getSession();
+//		String requette = "SELECT c FROM Commande c";
+//		Query<Commande> query = session.createQuery(requette, Commande.class);
+//		return query.list();
+//	}
+//
+//	@Override
+//	public List<Commande> getListeCommandes2() {
+//		Session session = HibernateConnector.getInstance().getSession();
+//		Query<Commande> query = session.createNamedQuery("Commande.findAll", Commande.class);
+//		return query.list();
+//	}
+//
+//	@Override
+//	public List<Commande> getListeCommandes3() {
+//		Session session = HibernateConnector.getInstance().getSession();
+//		String requette = "SELECT * FROM commande";
+//		NativeQuery<Commande> query = session.createNativeQuery(requette, Commande.class);
+//		return query.list();
+//	}
+//
+//	@Override
+//	public List<Commande> getListeCommandesById(Integer id) {
+//		Session session = HibernateConnector.getInstance().getSession();
+//		Query<Commande> query = session.createNamedQuery("Commande.findById", Commande.class);
+//		query.setParameter("id", id);
+//		return query.getResultList();
+//	}
+//
 	@Override
 	public List<Commande> getListeCommandesByUtilisateurId(Integer utilisateurId) {
 		Session session = HibernateConnector.getInstance().getSession();
@@ -96,6 +98,7 @@ public class CommandeDao extends AbstractEntityFacade<Commande> implements IComm
 			nbCommandesByVille.put((String)objects[0], ((Long) objects[1]).intValue());
 
 		}
+		
 		return nbCommandesByVille;
 	}
 

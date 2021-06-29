@@ -1,11 +1,11 @@
 package fr.doranco.ecommerce.model.dao;
 
-import java.util.Set;
+import java.util.List;
 
 import fr.doranco.ecommerce.entity.pojo.Adresse;
 
 public interface IAdresseDao  extends IEntityFacade<Adresse>  {
 
-	Set<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception;
-	Set<String> getNomsVillesUtilisateurs() throws Exception;
+	List<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception;
+	List<String> getNomsVillesUtilisateurs() throws Exception;
 }

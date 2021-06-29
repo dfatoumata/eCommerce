@@ -17,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "carte_paiement", catalog = "ecommerce_db_hibernate")
+@Table(name = "carte_paiement", catalog = "ecommerce_db")
 public class CartePaiement implements Serializable {
 
 	private static final long serialVersionUID = 1L;

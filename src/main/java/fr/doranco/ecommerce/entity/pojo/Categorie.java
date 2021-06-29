@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "categorie", catalog = "ecommerce_db_hibernate")
+@Table(name = "categorie", catalog = "ecommerce_db")
 
 public class Categorie  implements Serializable  {
 

@@ -98,6 +98,8 @@ public class Commande implements Serializable {
 		this.totalRemise = totalRemise;
 		this.fraisExpedition = fraisExpedition;
 		this.totalGeneral = totalGeneral;
+		this.lignesCommande = new HashSet<LigneCommande>();
+
 	}
 	
 
@@ -110,6 +112,8 @@ public class Commande implements Serializable {
 		this.totalRemise = totalRemise;
 		this.fraisExpedition = fraisExpedition;
 		this.totalGeneral = totalGeneral;
+		this.lignesCommande = new HashSet<LigneCommande>();
+
 	}
 
 	public Commande(Integer id, @NotNull Integer numero, @NotNull Date dateCreation, @NotNull Date dateLivraison,
@@ -127,6 +131,8 @@ public class Commande implements Serializable {
 		this.adresseLivraison = adresseLivraison;
 		this.cartePaiementDefaut = cartePaiementDefaut;
 		this.utilisateur = utilisateur;
+		this.lignesCommande = new HashSet<LigneCommande>();
+
 	}
 
 	public Integer getId() {
@@ -209,6 +215,15 @@ public class Commande implements Serializable {
 
 	public CartePaiement getCartePaiementDefaut() {
 		return cartePaiementDefaut;
+	}
+
+	@Override
+	public String toString() {
+		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="
+				+ dateLivraison + ", totalRemise=" + totalRemise + ", fraisExpedition=" + fraisExpedition
+				+ ", totalGeneral=" + totalGeneral + ", adresseFacturation=" + adresseFacturation
+				+ ", adresseLivraison=" + adresseLivraison + ", cartePaiementDefaut=" + cartePaiementDefaut
+				+ ", utilisateur=" + utilisateur + "]";
 	}
 
 

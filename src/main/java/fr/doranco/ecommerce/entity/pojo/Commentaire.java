@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "commentaire", catalog = "ecommerce_db_hibernate")
+@Table(name = "commentaire", catalog = "ecommerce_db")
 
 public class Commentaire  implements Serializable {
 

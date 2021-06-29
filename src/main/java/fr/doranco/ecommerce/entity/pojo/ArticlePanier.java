@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "ligneCommande", catalog = "ecommerce_db_hibernate")
+@Table(name = "ligneCommande", catalog = "ecommerce_db")
 
 public class ArticlePanier implements Serializable  {
 
