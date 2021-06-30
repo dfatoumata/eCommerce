@@ -1,16 +1,24 @@
 package fr.doranco.ecommerce.main;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.hibernate.Session;
 
 import fr.doranco.ecommerce.entity.pojo.Adresse;
 import fr.doranco.ecommerce.entity.pojo.Commande;
+import fr.doranco.ecommerce.entity.pojo.Params;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.HibernateConnector;
 import fr.doranco.ecommerce.model.dao.CommandeDao;
 import fr.doranco.ecommerce.model.dao.ICommandeDao;
 import fr.doranco.ecommerce.model.dao.IUtilisateurDao;
+import fr.doranco.ecommerce.model.dao.ParamsDao;
 import fr.doranco.ecommerce.model.dao.UtilisateurDao;
+import fr.doranco.ecommerce.utils.CryptageDesPbeBlowfish;
 import fr.doranco.ecommerce.utils.Dates;
+import fr.doranco.ecommerce.utils.GenerateKey;
 
 public class Main {
 	
@@ -25,6 +33,16 @@ public class Main {
 			Session session = HibernateConnector.getInstance().getSession();
 			System.out.println("Contexte Hibernate démarré avec succès.");
 			System.out.println(session);
+
+			String algorithm = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
+			SecretKey cleCryptage = GenerateKey.getKey(algorithm, 56);
+			byte[] cleCryptageBytes = cleCryptage.getEncoded();
+			Params params = new Params();
+			
+			params.setCleCrypatage(cleCryptageBytes);
+			ParamsDao paramsDao = new ParamsDao();
+			
+			paramsDao.add(params);
 			intialiser();
 			System.out.println(session);
 
@@ -42,8 +60,16 @@ public class Main {
 		Adresse adresse5 = new Adresse(12, "Rue Paul Lafargue", "Paris", "75000");
 		Adresse adresse6 = new Adresse(6, "Boulevard Blaise Pascal", "Rennes", "35000");
 		
-		Utilisateur Utilisateur = new Utilisateur("Mme","Fatou", "Diarra", Dates.convertStringToDateUtil("18/06/1940"), true, "C","dfatoumata57@yahoo.fr","test");
-		Utilisateur Utilisateur2 = new Utilisateur("M.","toto", "tata",  Dates.convertStringToDateUtil("18/06/1940"), true, "A","dfatoumata57@outlook.fr","test123");
+		String algorithm = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
+		ParamsDao paramsDao = new ParamsDao();
+		Params params = paramsDao.get(Params.class, 1);
+		
+		SecretKey cleCryptage = new SecretKeySpec(params.getCleCrypatage(), algorithm);
+		
+		byte[] motDePasseCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, "test", cleCryptage);
+		byte[] motDePasseCrypte2 = CryptageDesPbeBlowfish.encrypt(algorithm, "test123", cleCryptage);	
+		Utilisateur Utilisateur = new Utilisateur("Mme","Fatou", "Diarra", Dates.convertStringToDateUtil("18/06/1940"), true, "C","dfatoumata57@yahoo.fr",motDePasseCrypte);
+		Utilisateur Utilisateur2 = new Utilisateur("M.","toto", "tata",  Dates.convertStringToDateUtil("18/06/1940"), true, "A","dfatoumata57@outlook.fr",motDePasseCrypte2);
 		Commande commande = new Commande(10, Dates.convertStringToDateUtil("10/05/2021"), Dates.convertStringToDateUtil("18/05/2021"), 25.0,50.0, 40.0);
 		
 		

@@ -70,7 +70,7 @@ public class Utilisateur implements Serializable {
 	@NotNull
 	@NotEmpty
 	@Column(name = "password", length = 40, nullable = false)
-	private String password;
+	private byte[] password;
 	
 	@Column(name = "telephone", length = 40)	
 	private String telephone;
@@ -103,7 +103,7 @@ public class Utilisateur implements Serializable {
 	
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
 			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
-			@NotEmpty String password) {
+			@NotEmpty byte[] password) {
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -121,7 +121,7 @@ public class Utilisateur implements Serializable {
 
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
 			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
-			@NotEmpty String password, String telephone) {
+			@NotEmpty byte[] password, String telephone) {
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -141,7 +141,7 @@ public class Utilisateur implements Serializable {
 
 	public Utilisateur(Integer id, @NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
 			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
-			@NotEmpty String password, String telephone) {
+			@NotEmpty byte[] password, String telephone) {
 		this.id = id;
 		this.genre = genre;
 		this.nom = nom;
@@ -208,11 +208,11 @@ public class Utilisateur implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public byte[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(byte[] password) {
 		this.password = password;
 	}
 

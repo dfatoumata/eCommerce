@@ -2,8 +2,19 @@ package fr.doranco.ecommerce.vue;
 
 import java.io.Serializable;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
+import com.sun.faces.renderkit.html_basic.HtmlBasicRenderer.Param;
+
+import fr.doranco.ecommerce.entity.pojo.Params;
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
+import fr.doranco.ecommerce.model.dao.IUtilisateurDao;
+import fr.doranco.ecommerce.model.dao.UtilisateurDao;
+import fr.doranco.ecommerce.utils.CryptageDesPbeBlowfish;
 
 @ManagedBean(name = "loginBean")
 public class LoginBean implements Serializable {
@@ -25,7 +36,23 @@ public class LoginBean implements Serializable {
 	public LoginBean() {
 	}
 
-	public String seConnecter() {
+	public String  seConnecter() {
+		
+		final IUtilisateurDao userDao = new UtilisateurDao();
+		Utilisateur user = userDao.getUtilisateurByEmail(email);
+		String algorithm = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
+		Params params = new Params();
+		
+		SecretKey cleCryptage = new SecretKeySpec(params.getCleCrypatage(), algorithm);
+		byte[] passwordCrypte = user.getPassword();
+		String passwordDecrypte = CryptageDesPbeBlowfish.decrypt(algorithm, passwordCrypte, cleCryptage);
+		
+		if (motDePasse.equals(passwordDecrypte)) {
+			
+		}
+		
+		
+		//return password.equals(passwordDecrypte);
 		
 		//...récupérer les email et password saisis
 		//...appeler getUtilisateurByEmail(...)

@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 
 import fr.doranco.ecommerce.control.IUtilisateurMetier;
 import fr.doranco.ecommerce.control.UtilisateurMetier;
+import fr.doranco.ecommerce.entity.dto.UtilisateurDto;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.enums.TypeUtilisateur;
 import fr.doranco.ecommerce.utils.Dates;
@@ -21,7 +22,6 @@ public class UtilisateurBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(name = "userId", value = "")
 	private String userId;
 	
 	@ManagedProperty(name = "genre", value = "")
@@ -64,9 +64,9 @@ public class UtilisateurBean implements Serializable {
 			return "";
 		}
 		
-		Utilisateur user = new Utilisateur();
+		UtilisateurDto user = new UtilisateurDto();
 		try {
-			user.setDateNaissance(Dates.convertStringToDateUtil(dateNaissance));
+			user.setDateNaissance(dateNaissance);
 		} catch (Exception e) {
 			this.messageError = "Erreur lors de la conversion de date de naissance !\n"
 					+ e.getMessage();
@@ -79,7 +79,7 @@ public class UtilisateurBean implements Serializable {
 		user.setPassword(confirmPassword);
 		
 		user.setTelephone(telephone);
-		user.setProfil(TypeUtilisateur.CLIENT.getTypeUtilisateur());
+
 		
 		IUtilisateurMetier userMetier = new UtilisateurMetier();
 		try {

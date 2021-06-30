@@ -12,7 +12,10 @@ public class UtilisateurDao extends AbstractEntityFacade<Utilisateur> implements
 
 	IAdresseDao adresseDao = new AdresseDao();
 
-
+public UtilisateurDao() {
+	// TODO Auto-generated constructor stub
+}
+	
 //	@Override
 //	public Utilisateur getUtilisateurById(Integer id) throws Exception {
 //		return null;

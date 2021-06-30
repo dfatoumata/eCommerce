@@ -130,67 +130,6 @@
 					style="color:red"></h:outputText>
 			</p>
 		</h:form>
-	
-		<h:form>
-			<h4>Liste des utilisateurs</h4>
-			<h:dataTable value="#{userBean.getUtilisateurs()}" var="u"
-				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row order-table-even-row">
-			
-				<h:column>
-					<!-- l'entete de la colonne -->
-					<f:facet name="header">ID</f:facet>
-					<!-- la donnée de la colonne -->
-					<h:outputText value="#{u.id}"></h:outputText>
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">Genre</f:facet>
-					<h:outputText value="#{u.genre}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Nom</f:facet>
-					<h:outputText value="#{u.nom}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Prénom</f:facet>
-					<h:outputText value="#{u.prenom}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Email</f:facet>
-					<h:outputText value="#{u.email}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Téléphone</f:facet>
-					<h:outputText value="#{u.telephone}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Date Naissance</f:facet>
-					<h:outputText value="#{u.dateNaissance}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Profil</f:facet>
-					<h:outputText value="#{u.profil}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandLink value="Supprimer" action="#{userBean.supprimerUtilisateur(u)}"></h:commandLink>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton value="Afficher" action="#{userBean.afficherUtilisateur(u)}"></h:commandButton>
-				</h:column>
-			
-			</h:dataTable>
-		</h:form>
 		
 	</body>
 </html>
