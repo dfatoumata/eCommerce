@@ -75,7 +75,6 @@ public class UtilisateurBean implements Serializable {
 		user.setGenre(genre);
 		user.setNom(nom);
 		user.setPrenom(prenom);
-		user.setIsActif(true);
 		user.setEmail(email);
 		user.setPassword(confirmPassword);
 		
@@ -115,66 +114,66 @@ public class UtilisateurBean implements Serializable {
 		return "";
 	}
 
-	public String updateUtilisateur() {
-		
-		Utilisateur user = new Utilisateur();
-		user.setId(Integer.valueOf(this.userId));
-		user.setGenre(this.genre);
-		user.setNom(this.nom);
-		user.setPrenom(prenom);
-		try {
-			user.setDateNaissance(Dates.convertStringToDateUtil(dateNaissance));
-		} catch (Exception e) {
-			this.messageError = "Erreur technique lors de la conversion de la date de naissance de l'utilisateur !\n"
-					+ e.getMessage();
-			e.printStackTrace();
-		}
-		
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setProfil(TypeUtilisateur.CLIENT.getTypeUtilisateur());
-		user.setTelephone(telephone);
-		
-		IUtilisateurMetier userMetier = new UtilisateurMetier();
-		try {
-			userMetier.updateUtilisateur(user);
-		} catch (Exception e) {
-			this.messageError = "Erreur technique lors de la mise à jour de l'utilisateur sélectionné !\n"
-					+ e.getMessage();
-			e.printStackTrace();
-		}
-		// this.id = this.userId.toString(); 
-		return "";
-	}
+//	public String updateUtilisateur() {
+//		
+//		Utilisateur user = new Utilisateur();
+//		user.setId(Integer.valueOf(this.userId));
+//		user.setGenre(this.genre);
+//		user.setNom(this.nom);
+//		user.setPrenom(prenom);
+//		try {
+//			user.setDateNaissance(Dates.convertStringToDateUtil(dateNaissance));
+//		} catch (Exception e) {
+//			this.messageError = "Erreur technique lors de la conversion de la date de naissance de l'utilisateur !\n"
+//					+ e.getMessage();
+//			e.printStackTrace();
+//		}
+//		
+//		user.setEmail(email);
+//		user.setPassword(password);
+//		user.setProfil(TypeUtilisateur.CLIENT.getTypeUtilisateur());
+//		user.setTelephone(telephone);
+//		
+//		IUtilisateurMetier userMetier = new UtilisateurMetier();
+//		try {
+//			userMetier.updateUtilisateur(user);
+//		} catch (Exception e) {
+//			this.messageError = "Erreur technique lors de la mise à jour de l'utilisateur sélectionné !\n"
+//					+ e.getMessage();
+//			e.printStackTrace();
+//		}
+//		// this.id = this.userId.toString(); 
+//		return "";
+//	}
 
-	public String supprimerUtilisateur(Utilisateur utilisateur) {
-		
-		IUtilisateurMetier userMetier = new UtilisateurMetier();
-		try {
-			userMetier.removeUtilisateur(utilisateur);
-		} catch (Exception e) {
-			this.messageError = "Erreur technique lors de la suppression de l'utilisateur sélectionné !\n"
-					+ e.getMessage();
-			e.printStackTrace();
-		}
-		
-		return "";
-	}
-	
+//	public String supprimerUtilisateur(Utilisateur utilisateur) {
+//		
+//		IUtilisateurMetier userMetier = new UtilisateurMetier();
+//		try {
+//			userMetier.removeUtilisateur(utilisateur);
+//		} catch (Exception e) {
+//			this.messageError = "Erreur technique lors de la suppression de l'utilisateur sélectionné !\n"
+//					+ e.getMessage();
+//			e.printStackTrace();
+//		}
+//		
+//		return "";
+//	}
+//	
 
-	public List<Utilisateur> getUtilisateurs() {
-		IUtilisateurMetier userMetier = new UtilisateurMetier();
-		
-		List<Utilisateur> users = new ArrayList<Utilisateur>();
-		try {
-			users = userMetier.getUtilisateurs();
-		} catch (Exception e) {
-			messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
-			e.printStackTrace();
-		}
-		
-		return users;
-	}
+//	public List<Utilisateur> getUtilisateurs() {
+//		IUtilisateurMetier userMetier = new UtilisateurMetier();
+//		
+//		List<Utilisateur> users = new ArrayList<Utilisateur>();
+//		try {
+//			users = userMetier.getUtilisateurs();
+//		} catch (Exception e) {
+//			messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
+//			e.printStackTrace();
+//		}
+//		
+//		return users;
+//	}
 
 	public String seConnecter() {
 		
