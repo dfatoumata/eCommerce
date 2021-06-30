@@ -49,10 +49,10 @@ public class UtilisateurBean implements Serializable {
 	private String dateNaissance;
 	
 	@ManagedProperty(name = "messageSuccess", value = "")
-	private String messageSuccess;
+	private String messageSuccess = " ";
 	
 	@ManagedProperty(name = "messageError", value = "")
-	private String messageError;
+	private String messageError = " ";
 
 	public UtilisateurBean() {
 	}
@@ -75,6 +75,7 @@ public class UtilisateurBean implements Serializable {
 		user.setGenre(genre);
 		user.setNom(nom);
 		user.setPrenom(prenom);
+		user.setIsActif(true);
 		user.setEmail(email);
 		user.setPassword(confirmPassword);
 		
@@ -84,6 +85,7 @@ public class UtilisateurBean implements Serializable {
 		IUtilisateurMetier userMetier = new UtilisateurMetier();
 		try {
 			 userMetier.addUtilisateur(user);
+				this.messageSuccess = "Utilisateur ajouté avec succès.";
 		} catch (Exception e) {
 			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur !\n"
 					+ e.getMessage();
@@ -91,8 +93,6 @@ public class UtilisateurBean implements Serializable {
 		}
 		this.userId = String.valueOf(user.getId());
 		//this.id = addedUser.getId().toString();
-		
-		this.messageSuccess = "Utilisateur ajouté avec succès.";
 		return "";
 	}
 

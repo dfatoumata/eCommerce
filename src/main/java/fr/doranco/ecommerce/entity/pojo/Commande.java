@@ -68,15 +68,15 @@ public class Commande implements Serializable {
 	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="adresse_facturation_id", nullable = false )
+    @JoinColumn(name="adresse_facturation_id")
 	private Adresse adresseFacturation;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="adresse_livraison_id", nullable = false)
+    @JoinColumn(name="adresse_livraison_id")
 	private Adresse adresseLivraison;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="carte_paiement_id", nullable = false)
+    @JoinColumn(name="carte_paiement_id")
 	private CartePaiement cartePaiementDefaut;
 	
 	@ManyToOne
