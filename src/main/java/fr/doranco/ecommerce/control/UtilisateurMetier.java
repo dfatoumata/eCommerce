@@ -24,8 +24,8 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 
 	@Override
 	public Utilisateur getUtilisateurById(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return utilisateurDao.getUtilisateurById(id);
+		// utilisateurDao.getUtilisateurById(id);
+		return null;
 	}
 
 	@Override

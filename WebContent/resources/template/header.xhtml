@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<body>
+
+	<ui:composition>
+		<style type="text/css">
+.ui-sticky {
+	top: 0px !important;
+	styleClass: "ui-button-success" !important;
+}
+
+@media ( max-width : 960px) {
+	.ui-sticky {
+		top: 110px !important;
+		styleClass: "ui-button-success" !important;
+	}
+}
+</style>
+		<div class="card">
+			<p:toolbar id="tb" style="ui-button-success"
+				styleClass="ui-button-success">
+				<f:facet name="left">
+					<p:commandButton type="button" value="New" icon="pi pi-file"
+						styleClass="p-mr-2" />
+					<p:commandButton type="button" value="Open"
+						icon="pi pi-folder-open" styleClass="ui-button-success" />
+					<p:commandButton type="button" title="Delete" icon="pi pi-trash"
+						styleClass="ui-button-danger p-mr-2" />
+					<p:commandButton type="button" title="Print" icon="pi pi-print"
+						styleClass="ui-button-help" />
+					<p:commandButton type="button" value="New" icon="pi pi-file"
+						styleClass="p-mr-2" />
+				</f:facet>
+				<f:facet name="right">
+					<p:button type="button" title="Se connecter" value = "Se connecter" 
+						icon="pi pi-user" styleClass="warn-button p-mr-2" outcome="login" />
+					<p:button type="button" value="Creer un compte"
+						icon="pi pi-user-plus" styleClass="ui-button-success"  outcome="utilisateurs" />
+				</f:facet>
+			</p:toolbar>
+
+			<div style="height: 800px"></div>
+
+			<p:sticky target="tb" />
+		</div>
+
+		<h:graphicImage library="images" name="logo_doranco.jpg"></h:graphicImage>
+	</ui:composition>
+
+</body>
+</html>

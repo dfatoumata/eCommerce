@@ -41,8 +41,8 @@ public class ArticleMetier implements IArticleMetier {
 
 	@Override
 	public List<Article> getArticleByCategorie(String categorie) throws Exception {
-		// TODO Auto-generated method stub
-		return articleDao.getArticleByCategorie(categorie);
+		//articleDao.getArticleByCategorie(categorie); 
+		return null;
 	}
 	
 
