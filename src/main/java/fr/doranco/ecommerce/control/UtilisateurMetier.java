@@ -11,7 +11,6 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	
 	UtilisateurDao utilisateurDao = new UtilisateurDao(); 
 	
-	
 	@Override
 	public void addUtilisateur(Utilisateur utilisateur) throws Exception {
 		
