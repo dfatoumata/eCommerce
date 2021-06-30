@@ -36,15 +36,15 @@ public class Utilisateur implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "genre", length = 25, nullable = false)
 	private String genre;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
 
@@ -58,17 +58,14 @@ public class Utilisateur implements Serializable {
 	private Boolean isActif;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "profil", length = 1, nullable = false)	
 	private String profil;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "email", length = 40, nullable = false, unique = true)
 	private String email;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "password", length = 40, nullable = false)
 	private byte[] password;
 	
@@ -101,9 +98,15 @@ public class Utilisateur implements Serializable {
 		commentaires = new HashSet<Commentaire>();
 	}
 	
+<<<<<<< HEAD
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
 			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
 			@NotEmpty byte[] password) {
+=======
+	public Utilisateur(@NotNull String genre, @NotNull String nom, @NotNull String prenom,
+			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotNull String profil, @NotNull String email,
+			@NotNull String password) {
+>>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -119,9 +122,15 @@ public class Utilisateur implements Serializable {
 		commentaires = new HashSet<Commentaire>();
 	}
 
+<<<<<<< HEAD
 	public Utilisateur(@NotEmpty String genre, @NotEmpty String nom, @NotEmpty String prenom,
 			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotEmpty String profil, @NotEmpty String email,
 			@NotEmpty byte[] password, String telephone) {
+=======
+	public Utilisateur(@NotNull String genre, @NotNull String nom, @NotNull String prenom,
+			@NotNull Date dateNaissance, @NotNull Boolean isActif, @NotNull String profil, @NotNull String email,
+			@NotNull String password, String telephone) {
+>>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
