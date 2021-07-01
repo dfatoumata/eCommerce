@@ -6,8 +6,10 @@ import javax.persistence.Convert;
 
 import fr.doranco.ecommerce.entity.dto.AdresseDto;
 import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.model.dao.AdresseDao;
 import fr.doranco.ecommerce.model.dao.IAdresseDao;
+import fr.doranco.ecommerce.model.dao.UtilisateurDao;
 
 
 public class AdresseMetier implements IAdresseMetier {
@@ -25,8 +27,11 @@ public class AdresseMetier implements IAdresseMetier {
 		adresse.setVille(adresseDto.getRue().toUpperCase());
 		adresse.setVille(adresseDto.getVille().toUpperCase());
 		adresse.setCodePostal(adresseDto.getCodePostal());
+		UtilisateurDao utilisateurDao = new UtilisateurDao();
 		
-	//	adresse.setUtilisateur(adresseDto.getUtilisateur()));
+		Utilisateur utilisateur = utilisateurDao.get(Utilisateur.class, idUtilisateur);
+		
+		adresse.setUtilisateur(utilisateur);
 		
 		adresseDao.add(adresse);
 	}
