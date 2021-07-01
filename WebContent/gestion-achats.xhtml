@@ -16,20 +16,22 @@
 		<ui:define name="content">
 			<h:form>
 				<h4>Liste des articles</h4>
+				
+						<p:button type="button" title="AjouterAdresse" value="Ajoute une adresse de facturation"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="ajouter-adresse" />
+						
+				
+				
+				
 				<h:dataTable value="#{gestionAchatBean.getArticles()}" var="a"
 					styleClass="order-table" headerClass="order-table-header"
 					rowClasses="order-table-odd-row order-table-even-row">
 
-					<h:column>
-						<f:facet name="header">Ajouter au panier</f:facet>
-						<h:selectBooleanCheckbox value="#{a.id}"></h:selectBooleanCheckbox>
-					</h:column>
 
 					<h:column>
-				l'entete de la colonne
-				<f:facet name="header">ID</f:facet>
-				la donnée de la colonne
-				<h:outputText value="#{a.id}"></h:outputText>
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{a.id}"></h:outputText>
 					</h:column>
 
 					<h:column>
@@ -44,8 +46,10 @@
 
 					<h:column>
 						<f:facet name="header">Prix</f:facet>
-						<h:outputText value="#{a.prix}"></h:outputText>
+						<h:outputText value="#{a.prix}" ></h:outputText>
 					</h:column>
+					
+
 
 					<h:column>
 						<f:facet name="header">Remise</f:facet>
@@ -59,8 +63,9 @@
 
 					<h:column>
 						<f:facet name="header">Categorie</f:facet>
-						<h:outputText value="#{a.categorie}"></h:outputText>
+						<h:outputText value="#{a.categorie.nom}"></h:outputText>
 					</h:column>
+
 
 				</h:dataTable>
 

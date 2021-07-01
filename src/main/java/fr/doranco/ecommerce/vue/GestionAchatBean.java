@@ -3,7 +3,6 @@ package fr.doranco.ecommerce.vue;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -79,7 +78,10 @@ public class GestionAchatBean implements Serializable {
 //	
 //	@ManagedProperty(name = "dateNaissance", value = "")
 //	private String dateNaissance;
-
+	
+//	@ManagedProperty(name = "quantite", value = "")
+//	private String quantite = " ";
+	
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess = " ";
 
@@ -90,8 +92,8 @@ public class GestionAchatBean implements Serializable {
 	}
 
 	String ajouterAuPanier(Article article, String quantite) {
-		
-		Integer qte = Integer.valueOf(quantite); 
+
+		Integer qte = Integer.valueOf(quantite);
 		Utilisateur user = LoginBean.getConnectedUser();
 		ArticlePanier articlePanier = new ArticlePanier();
 		articlePanier.setArticle(article);
@@ -101,7 +103,7 @@ public class GestionAchatBean implements Serializable {
 			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
 		}
 		user.getPanier().add(articlePanier);
-		
+
 		IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
 		try {
 			utilisateurMetier.updateUtilisateur(user);
@@ -114,7 +116,7 @@ public class GestionAchatBean implements Serializable {
 	}
 
 	public List<Article> getArticles() {
-		
+
 		IArticleMetier articleMetier = new ArticleMetier();
 
 		List<Article> articles = new ArrayList<Article>();
