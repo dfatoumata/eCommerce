@@ -49,8 +49,12 @@
 						<h:outputText value="#{a.prix}" ></h:outputText>
 					</h:column>
 					
-
-
+					<h:column>
+						<f:facet name="header">Quantite</f:facet>
+						<p:inputText binding="#{quatite}" />
+					</h:column>
+					
+					
 					<h:column>
 						<f:facet name="header">Remise</f:facet>
 						<h:outputText value="#{a.remise}"></h:outputText>
@@ -66,8 +70,11 @@
 						<h:outputText value="#{a.categorie.nom}"></h:outputText>
 					</h:column>
 
-
-				</h:dataTable>
+				<h:column>
+					<f:facet name="header">Ajouter au panier</f:facet>
+					<h:commandButton value="Ajouter au panier" action="#{gestionAchatBean.ajouterAuPanier(a,quatite.value)}"></h:commandButton>
+				</h:column>
+				</h:dataTable>				
 
 			</h:form>
 		</ui:define>

@@ -87,14 +87,16 @@ public class GestionAchatBean implements Serializable {
 
 	@ManagedProperty(name = "messageError", value = "")
 	private String messageError = " ";
-
+	Utilisateur user = LoginBean.getConnectedUser();
+	
 	public GestionAchatBean() {
 	}
 
-	String ajouterAuPanier(Article article, String quantite) {
+
+	public String ajouterAuPanier(Article article, String quantite) {
 
 		Integer qte = Integer.valueOf(quantite);
-		Utilisateur user = LoginBean.getConnectedUser();
+
 		ArticlePanier articlePanier = new ArticlePanier();
 		articlePanier.setArticle(article);
 		articlePanier.setQuantite(qte);
@@ -112,6 +114,12 @@ public class GestionAchatBean implements Serializable {
 			e.printStackTrace();
 			return "";
 		}
+		return "";
+	}
+	
+	public String validerPanier(Article article, String quantite) {
+		
+		
 		return "";
 	}
 
