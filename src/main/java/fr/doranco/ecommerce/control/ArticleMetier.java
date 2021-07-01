@@ -2,16 +2,35 @@ package fr.doranco.ecommerce.control;
 
 import java.util.List;
 
+import fr.doranco.ecommerce.entity.dto.ArticleDto;
 import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.model.dao.ArticleDao;
 import fr.doranco.ecommerce.model.dao.UtilisateurDao;
 
 public class ArticleMetier implements IArticleMetier {
+	ArticleDao articleDao = new ArticleDao(); 
+
+	public ArticleMetier() {
+	}
+	
 
 	
-	ArticleDao articleDao = new ArticleDao(); 
 	@Override
-	public void addArticle(Article article) throws Exception {
+	public void addArticle(ArticleDto articleDto) throws Exception {
+	
+		Article article = new Article();
+		
+		article.setNom(articleDto.getNom().substring(0, 1).toUpperCase()
+				.concat(articleDto.getNom().substring(1).toLowerCase()));
+		
+		article.setDescription(articleDto.getDescription().substring(0, 1).toUpperCase()
+				.concat(articleDto.getDescription().substring(1).toLowerCase()));
+		
+		article.setPrix(Double.parseDouble(articleDto.getPrix()) );
+		
+		article.setRemise(Integer.parseInt(articleDto.getRemise()));
+		
+		
 		articleDao.add(article);
 		
 	}
@@ -22,14 +41,26 @@ public class ArticleMetier implements IArticleMetier {
 		return articleDao.get(Article.class, id);}
 
 	@Override
-	public void updateArticle(Article article) throws Exception {
+	public void updateArticle(ArticleDto articleDto) throws Exception {
+		Article article = new Article();
+		article.setNom(articleDto.getNom().substring(0, 1).toUpperCase()
+				.concat(articleDto.getNom().substring(1).toLowerCase()));
+		
+		article.setDescription(articleDto.getDescription().substring(0, 1).toUpperCase()
+				.concat(articleDto.getDescription().substring(1).toLowerCase()));
+		
+		article.setPrix(Double.parseDouble(articleDto.getPrix()) );
+		
+		article.setRemise(Integer.parseInt(articleDto.getRemise()));
+		
 		articleDao.update(article);
 		
 	}
 
 	@Override
-	public void removeArticle(Article Article) throws Exception {
-		articleDao.remove(Article);
+	public void removeArticle(ArticleDto articleDto) throws Exception {
+		Article article = new Article();
+		articleDao.remove(article);
 		
 	}
 
