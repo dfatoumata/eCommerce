@@ -79,6 +79,14 @@ public class Commande implements Serializable {
     @JoinColumn(name="carte_paiement_id")
 	private CartePaiement cartePaiementDefaut;
 	
+	public void setAdresseFacturation(Adresse adresseFacturation) {
+		this.adresseFacturation = adresseFacturation;
+	}
+
+	public void setAdresseLivraison(Adresse adresseLivraison) {
+		this.adresseLivraison = adresseLivraison;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;

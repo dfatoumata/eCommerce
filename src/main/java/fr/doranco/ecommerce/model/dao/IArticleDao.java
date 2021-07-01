@@ -9,5 +9,7 @@ import fr.doranco.ecommerce.entity.pojo.Categorie;
 public interface IArticleDao extends IEntityFacade<Article> {
 
 	List<Article> getArticlesByCategorie(Categorie categorie) throws Exception;
+
+	List<Article> getArticlesByCategorie(String categorie) throws Exception;
 	
 }
