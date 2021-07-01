@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class Adresse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment
 	@Column(name = "id")
@@ -49,8 +49,11 @@ public class Adresse implements Serializable {
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
 	
-	
+
+
 	public Adresse() {
+		System.out.println("Adresse");
+
 	}
 
 	public Adresse(Integer numero, String rue, String ville, String codePostal) {

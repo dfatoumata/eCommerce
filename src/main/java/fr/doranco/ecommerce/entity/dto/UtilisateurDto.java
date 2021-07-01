@@ -10,6 +10,7 @@ public class UtilisateurDto {
 	private String password;
 	private String telephone;
 	private String dateNaissance;
+	private String profil;
 	
 	public UtilisateurDto() {
 		
@@ -18,7 +19,8 @@ public class UtilisateurDto {
 	
 
 	
-	public UtilisateurDto(String genre, String nom, String prenom, String email, String password, String dateNaissance) {
+	public UtilisateurDto(String genre, String nom, String prenom, String email, String password, String dateNaissance, String profil) {
+		this.profil = profil;
 		this.genre = genre;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -28,7 +30,8 @@ public class UtilisateurDto {
 	}
 
 
-	public UtilisateurDto(String genre, String id, String nom, String prenom, String email, String password, String dateNaissance) {
+	public UtilisateurDto(String genre, String id, String nom, String prenom, String email, String password, String dateNaissance, String profil) {
+		this.profil = profil;
 		this.genre = genre;
 		this.id = id;
 		this.nom = nom;
@@ -40,7 +43,8 @@ public class UtilisateurDto {
 
 
 	public UtilisateurDto(String genre, String id, String nom, String prenom, String email, String password, String telephone,
-			String dateNaissance) {
+			String dateNaissance, String profil) {
+		this.profil = profil;
 		this.genre = genre;
 		this.id = id;
 		this.nom = nom;
@@ -118,6 +122,16 @@ public class UtilisateurDto {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+
+
+	public String getProfil() {
+		return profil;
+	}
+
+
+	public void setProfil(String profil) {
+		this.profil = profil;
 	}
 	
 	

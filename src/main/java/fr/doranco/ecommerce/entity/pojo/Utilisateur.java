@@ -36,15 +36,15 @@ public class Utilisateur implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "genre", length = 25, nullable = false)
 	private String genre;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
 
@@ -58,17 +58,14 @@ public class Utilisateur implements Serializable {
 	private Boolean isActif;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "profil", length = 1, nullable = false)	
 	private String profil;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "email", length = 40, nullable = false, unique = true)
 	private String email;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "password", length = 40, nullable = false)
 	private byte[] password;
 	

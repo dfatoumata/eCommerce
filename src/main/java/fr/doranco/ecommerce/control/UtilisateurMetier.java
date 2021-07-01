@@ -49,7 +49,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 		if (utilisateurDto.getTelephone() != null) {
 			utilisateur.setTelephone(utilisateurDto.getTelephone());
 		}	
-		utilisateur.setProfil(TypeUtilisateur.CLIENT.getTypeUtilisateur());
+		utilisateur.setProfil(utilisateurDto.getProfil());
 		utilisateur.setIsActif(true);
 		
 

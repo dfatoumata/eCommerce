@@ -31,6 +31,8 @@ public class Params implements Serializable {
 
 	
 	public Params() {
+		System.out.println("Params");
+
 	}
 
 

@@ -44,6 +44,11 @@ public class Main {
 			
 			paramsDao.add(params);
 			intialiser();
+			
+//			ParamsDao paramsDao = new ParamsDao();
+//			
+//			paramsDao.get(Params.class, 1);
+//			
 			System.out.println(session);
 
 		} catch(Exception e) {

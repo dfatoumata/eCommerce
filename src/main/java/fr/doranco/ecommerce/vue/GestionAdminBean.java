@@ -16,9 +16,9 @@ import fr.doranco.ecommerce.enums.TypeUtilisateur;
 import fr.doranco.ecommerce.utils.Dates;
 
 
-@ManagedBean(name = "userBean")
+@ManagedBean(name = "gestionAdminBean")
 @SessionScoped
-public class UtilisateurBean implements Serializable {
+public class GestionAdminBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -54,10 +54,10 @@ public class UtilisateurBean implements Serializable {
 	@ManagedProperty(name = "messageError", value = "")
 	private String messageError = " ";
 
-	public UtilisateurBean() {
+	public GestionAdminBean() {
 	}
 	
-	public String ajouterUtilisateur() {
+	public String ajouterAdmin() {
 
 		if (!password.equals(confirmPassword)) {
 			this.messageError = "Le mot de passe et le mot de passe de confirmation ne correspondent pas !\n";
@@ -72,8 +72,7 @@ public class UtilisateurBean implements Serializable {
 		user.setPrenom(prenom);
 		user.setEmail(email);
 		user.setPassword(confirmPassword);
-		user.setProfil(TypeUtilisateur.CLIENT.getTypeUtilisateur());
-
+		user.setProfil(TypeUtilisateur.ADMIN.getTypeUtilisateur());
 		if (user.getTelephone() != null) {
 			user.setTelephone(telephone);
 		}
@@ -93,6 +92,42 @@ public class UtilisateurBean implements Serializable {
 		return "";
 	}
 
+	public String ajouterMagasinier() {
+
+		if (!password.equals(confirmPassword)) {
+			this.messageError = "Le mot de passe et le mot de passe de confirmation ne correspondent pas !\n";
+			return "";
+		}
+		
+		UtilisateurDto user = new UtilisateurDto();
+		user.setDateNaissance(dateNaissance);
+
+		user.setGenre(genre);
+		user.setNom(nom);
+		user.setPrenom(prenom);
+		user.setEmail(email);
+		user.setPassword(confirmPassword);
+		user.setProfil(TypeUtilisateur.MAGASINIER.getTypeUtilisateur());
+		if (user.getTelephone() != null) {
+			user.setTelephone(telephone);
+		}
+
+		
+		IUtilisateurMetier userMetier = new UtilisateurMetier();
+		try {
+			 userMetier.addUtilisateur(user);
+				this.messageSuccess = "Utilisateur ajouté avec succès.";
+		} catch (Exception e) {
+			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur !\n"
+					+ e.getMessage();
+			e.printStackTrace();
+		}
+		this.userId = String.valueOf(user.getId());
+		//this.id = addedUser.getId().toString();
+		return "";
+	}
+
+	
 	public String afficherUtilisateur(Utilisateur utilisateur) {
 		
 		this.userId = utilisateur.getId().toString();
