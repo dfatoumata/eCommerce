@@ -2,6 +2,9 @@ package fr.doranco.ecommerce.control;
 
 import java.util.Set;
 
+import javax.persistence.Convert;
+
+import fr.doranco.ecommerce.entity.dto.AdresseDto;
 import fr.doranco.ecommerce.entity.pojo.Adresse;
 import fr.doranco.ecommerce.model.dao.AdresseDao;
 import fr.doranco.ecommerce.model.dao.IAdresseDao;
@@ -15,8 +18,16 @@ public class AdresseMetier implements IAdresseMetier {
 	}
 	
 	@Override
-	public void addAdresse(Adresse adresse, Integer idUtilisateur) throws Exception {
-		adresse.setVille(adresse.getVille().toUpperCase());
+	public void addAdresse(AdresseDto adresseDto, Integer idUtilisateur) throws Exception {
+		Adresse adresse = new Adresse();
+		
+		adresse.setNumero(Integer.parseInt(adresseDto.getNumero()));
+		adresse.setVille(adresseDto.getRue().toUpperCase());
+		adresse.setVille(adresseDto.getVille().toUpperCase());
+		adresse.setCodePostal(adresseDto.getCodePostal());
+		
+	//	adresse.setUtilisateur(adresseDto.getUtilisateur()));
+		
 		adresseDao.add(adresse);
 	}
 
@@ -26,7 +37,9 @@ public class AdresseMetier implements IAdresseMetier {
 	}
 
 	@Override
-	public void updateAdresse(Adresse adresse) throws Exception {
+	public void updateAdresse(AdresseDto adresseDto) throws Exception {
+		Adresse adresse = new Adresse();
+		
 		adresseDao.update(adresse);
 	}
 
