@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import fr.doranco.ecommerce.entity.pojo.Params;
 import fr.doranco.ecommerce.model.dao.IParamsDao;

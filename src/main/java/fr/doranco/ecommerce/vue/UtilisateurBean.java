@@ -8,11 +8,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.ecommerce.control.IUtilisateurMetier;
-import fr.doranco.ecommerce.control.UtilisateurMetier;
 import fr.doranco.ecommerce.entity.dto.UtilisateurDto;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.enums.TypeUtilisateur;
+import fr.doranco.ecommerce.metier.IUtilisateurMetier;
+import fr.doranco.ecommerce.metier.UtilisateurMetier;
 import fr.doranco.ecommerce.utils.Dates;
 
 

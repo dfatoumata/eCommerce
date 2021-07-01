@@ -22,6 +22,8 @@ public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private static Utilisateur connectedUser;
+	
 	@ManagedProperty(name = "email", value = "")
 	private String email;
 	
@@ -67,19 +69,24 @@ public class LoginBean implements Serializable {
 		}
 		
 		if (password.equals(passwordDecrypte) && user.getIsActif()) {
+
+			messageSuccess = "Connexion reussie";
+			this.connectedUser = user;
+			return user.getProfil().equals("C") ? "gestion-achats"
+					: user.getProfil().equals("M") ? "gestion-articles" : "gestion-admin";
 			
-			if (user.getProfil().equals("C")) {
-				messageSuccess = "Connexion reussie";
-				return "gestion-achats";
-			}
-			if (user.getProfil().equals("M")) {
-				messageSuccess = "Connexion reussie";
-				return "gestion-articles";
-			}
-			if (user.getProfil().equals("A")) {
-				messageSuccess = "Connexion reussie";
-				return "gestion-admin";
-			}
+//			if (user.getProfil().equals("C")) {
+//				messageSuccess = "Connexion reussie";
+//				return "gestion-achats";
+//			}
+//			if (user.getProfil().equals("M")) {
+//				messageSuccess = "Connexion reussie";
+//				return "gestion-articles";
+//			}
+//			if (user.getProfil().equals("A")) {
+//				messageSuccess = "Connexion reussie";
+//				return "gestion-admin";
+//			}
 		}else {
 			messageError = "Email et ou mot de passe incorrect, veuillez reesayer ou creez un compte";
 		}
@@ -87,6 +94,10 @@ public class LoginBean implements Serializable {
 		return "";
 	}
 	
+	public static Utilisateur getConnectedUser() {
+		return connectedUser;
+	}
+
 	public String getEmail() {
 		return email;
 	}

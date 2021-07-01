@@ -39,6 +39,8 @@ public class ArticlePanier implements Serializable  {
 	private Utilisateur utilisateur;
 
 	public ArticlePanier() {
+		System.out.println("ArticlePanier");
+
 	}
 
 	public ArticlePanier(Article article, @NotNull Integer quantite) {

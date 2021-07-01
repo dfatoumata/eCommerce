@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import java.util.List;
 import java.util.Set;
