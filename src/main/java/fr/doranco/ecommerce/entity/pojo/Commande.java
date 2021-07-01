@@ -87,6 +87,8 @@ public class Commande implements Serializable {
 	private Set<LigneCommande> lignesCommande;
 	
 	public Commande() {
+		System.out.println("Commande");
+
 		this.lignesCommande = new HashSet<LigneCommande>();
 	}
 

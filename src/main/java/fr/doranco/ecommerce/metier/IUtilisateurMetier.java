@@ -1,8 +1,9 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import java.util.List;
 
 import fr.doranco.ecommerce.entity.dto.UtilisateurDto;
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 
 public interface IUtilisateurMetier {
 
@@ -15,5 +16,6 @@ public interface IUtilisateurMetier {
 	
 	List<UtilisateurDto> getUtilisateurs() throws Exception;
 	List<UtilisateurDto> getUtilisateursByVille(String ville) throws Exception;
+	void updateUtilisateur(Utilisateur utilisateur) throws Exception;
 
 }

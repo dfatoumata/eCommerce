@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
 import fr.doranco.ecommerce.entity.pojo.CartePaiement;

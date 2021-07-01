@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import java.util.List;
 
@@ -71,14 +71,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 	}
 
 	@Override
-	public void updateUtilisateur(UtilisateurDto utilisateurDto) throws Exception {
-		
-		Utilisateur utilisateur = new Utilisateur();
-		
-		utilisateur.setNom(utilisateurDto.getNom().toUpperCase());
-		
-		utilisateur.setPrenom(utilisateurDto.getPrenom().substring(0, 1).toUpperCase()
-				.concat(utilisateurDto.getPrenom().substring(1).toLowerCase()));
+	public void updateUtilisateur(Utilisateur utilisateur) throws Exception {
 		
 		 utilisateurDao.update(utilisateur);
 

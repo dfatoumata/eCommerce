@@ -64,6 +64,8 @@ public class Article  implements Serializable  {
 
 
 	public Article() {
+		System.out.println("Article");
+
 		commentaires = new HashSet<Commentaire>();
 	}
 

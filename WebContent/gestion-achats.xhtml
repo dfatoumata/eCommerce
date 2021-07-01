@@ -1,74 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<body>
-			<h3>Bienvenue dans gestion achat</h3>
-					
-		<h:form>
-			<h4>Liste des articles </h4>
-			<h:dataTable value="#{userBean.getUtilisateurs()}" var="a"
-				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row order-table-even-row">
-			
-				<h:column>
-					<!-- l'entete de la colonne -->
-					<f:facet name="header">ID</f:facet>
-					<!-- la donnée de la colonne -->
-					<h:outputText value="#{a.id}"></h:outputText>
-				</h:column>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-				<h:column>
-					<f:facet name="header">Genre</f:facet>
-					<h:outputText value="#{u.genre}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Nom</f:facet>
-					<h:outputText value="#{u.nom}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Prénom</f:facet>
-					<h:outputText value="#{u.prenom}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Email</f:facet>
-					<h:outputText value="#{u.email}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Téléphone</f:facet>
-					<h:outputText value="#{u.telephone}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Date Naissance</f:facet>
-					<h:outputText value="#{u.dateNaissance}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Profil</f:facet>
-					<h:outputText value="#{u.profil}"></h:outputText>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandLink value="Supprimer" action="#{userBean.supprimerUtilisateur(u)}"></h:commandLink>
-				</h:column>
-			
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton value="Afficher" action="#{userBean.afficherUtilisateur(u)}"></h:commandButton>
-				</h:column>
-			
-			</h:dataTable>
-		</h:form>
-		
-			
-	</body>	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Gestion des achats</title>
+</head>
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h4>Liste des articles</h4>
+				<h:dataTable value="#{gestionAchatBean.getArticles()}" var="a"
+					styleClass="order-table" headerClass="order-table-header"
+					rowClasses="order-table-odd-row order-table-even-row">
+
+					<h:column>
+						<f:facet name="header">Ajouter au panier</f:facet>
+						<h:selectBooleanCheckbox value="#{a.id}"></h:selectBooleanCheckbox>
+					</h:column>
+
+					<h:column>
+				l'entete de la colonne
+				<f:facet name="header">ID</f:facet>
+				la donn�e de la colonne
+				<h:outputText value="#{a.id}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nom</f:facet>
+						<h:outputText value="#{a.nom}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Description</f:facet>
+						<h:outputText value="#{a.description}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Prix</f:facet>
+						<h:outputText value="#{a.prix}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Remise</f:facet>
+						<h:outputText value="#{a.remise}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Stock</f:facet>
+						<h:outputText value="#{a.stock}"></h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Categorie</f:facet>
+						<h:outputText value="#{a.categorie}"></h:outputText>
+					</h:column>
+
+				</h:dataTable>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
 </html>

@@ -3,20 +3,19 @@ package fr.doranco.ecommerce.vue;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.ecommerce.control.IArticleMetier;
-import fr.doranco.ecommerce.control.IUtilisateurMetier;
-import fr.doranco.ecommerce.control.UtilisateurMetier;
-import fr.doranco.ecommerce.entity.dto.UtilisateurDto;
 import fr.doranco.ecommerce.entity.pojo.Article;
+import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
-import fr.doranco.ecommerce.enums.TypeUtilisateur;
-import fr.doranco.ecommerce.utils.Dates;
-
+import fr.doranco.ecommerce.metier.ArticleMetier;
+import fr.doranco.ecommerce.metier.IArticleMetier;
+import fr.doranco.ecommerce.metier.IUtilisateurMetier;
+import fr.doranco.ecommerce.metier.UtilisateurMetier;
 
 @ManagedBean(name = "gestionAchatBean")
 @SessionScoped
@@ -24,55 +23,115 @@ public class GestionAchatBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String userId;
-	
-	@ManagedProperty(name = "genre", value = "")
-	private String genre;
-	
-	@ManagedProperty(name = "nom", value = "")
-	private String nom;
-	
-	@ManagedProperty(name = "prenom", value = "")
-	private String prenom;
-	
-	@ManagedProperty(name = "email", value = "")
-	private String email;
-	
-	@ManagedProperty(name = "password", value = "")
-	private String password;
-	
-	@ManagedProperty(name = "confirmPassword", value = "")
-	private String confirmPassword;
-	
-	@ManagedProperty(name = "telephone", value = "")
-	private String telephone;
-	
-	@ManagedProperty(name = "dateNaissance", value = "")
-	private String dateNaissance;
-	
+//	@ManagedProperty(name = "id", value = "")
+//	private String id;
+//	@ManagedProperty(name = "nom", value = "")
+//	private String nom;
+//	@ManagedProperty(name = "description", value = "")
+//	private String description;
+//	@ManagedProperty(name = "prix", value = "")
+//	private String prix;
+//	@ManagedProperty(name = "remise", value = "")
+//	private String remise;
+//	@ManagedProperty(name = "stock", value = "")
+//	private String stock;
+//	@ManagedProperty(name = "isVendable", value = "")
+//	private String isVendable;
+
+//	@ManagedProperty(name = "articleId", value = "")
+//	private String articleId;
+//	@ManagedProperty(name = "articleNom", value = "")
+//	private String articleNom;
+//	@ManagedProperty(name = "articleDescription", value = "")
+//	private String articleDescription;
+//	@ManagedProperty(name = "articlePrix", value = "")
+//	private String articlePrix;
+//	@ManagedProperty(name = "articleRemise", value = "")
+//	private String articleRemise;
+//	@ManagedProperty(name = "articleStock", value = "")
+//	private String articleStock;
+//	@ManagedProperty(name = "articleIsVendable", value = "")
+//	private String articleIsVendable;
+
+//	@ManagedProperty(name = "userId", value = "")
+//	private String userId;
+//	
+//	@ManagedProperty(name = "genre", value = "")
+//	private String genre;
+//	
+//	@ManagedProperty(name = "nom", value = "")
+//	private String nom;
+//	
+//	@ManagedProperty(name = "prenom", value = "")
+//	private String prenom;
+//	
+//	@ManagedProperty(name = "email", value = "")
+//	private String email;
+//	
+//	@ManagedProperty(name = "password", value = "")
+//	private String password;
+//	
+//	@ManagedProperty(name = "confirmPassword", value = "")
+//	private String confirmPassword;
+//	
+//	@ManagedProperty(name = "telephone", value = "")
+//	private String telephone;
+//	
+//	@ManagedProperty(name = "dateNaissance", value = "")
+//	private String dateNaissance;
+
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess = " ";
-	
+
 	@ManagedProperty(name = "messageError", value = "")
 	private String messageError = " ";
 
 	public GestionAchatBean() {
 	}
-	
-	public List<Article> getArticles() {
-	IArticleMetier articleMetier = new 
-	
-	List<Utilisateur> users = new ArrayList<Utilisateur>();
-	try {
-		users = userMetier.getUtilisateurs();
-	} catch (Exception e) {
-		messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
-		e.printStackTrace();
+
+	String ajouterAuPanier(Article article, String quantite) {
+		
+		Integer qte = Integer.valueOf(quantite); 
+		Utilisateur user = LoginBean.getConnectedUser();
+		ArticlePanier articlePanier = new ArticlePanier();
+		articlePanier.setArticle(article);
+		articlePanier.setQuantite(qte);
+		if (user.getPanier().contains(articlePanier)) {
+			Integer oldQuantite = user.getPanier().get(user.getPanier().indexOf(articlePanier)).getQuantite();
+			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
+		}
+		user.getPanier().add(articlePanier);
+		
+		IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
+		try {
+			utilisateurMetier.updateUtilisateur(user);
+			// afficher un popup indiquant que l'article a été ajouté au panier
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		return "";
 	}
-	
-	return users;
-}
-	
+
+	public List<Article> getArticles() {
+		
+		IArticleMetier articleMetier = new ArticleMetier();
+
+		List<Article> articles = new ArrayList<Article>();
+		try {
+			articles = articleMetier.getArticles();
+		} catch (Exception e) {
+			messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
+			e.printStackTrace();
+		}
+
+		return articles;
+	}
+
+//	public String ajouterAuPanier() {
+//		
+//	}
+
 //	public String updateUtilisateur() {
 //		
 //		Utilisateur user = new Utilisateur();
@@ -120,85 +179,83 @@ public class GestionAchatBean implements Serializable {
 //	}
 //	
 
-
-
 	public String seConnecter() {
-		
+
 		return "";
 	}
-	
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public String getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public void setDateNaissance(String dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
+//
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
+//
+//	public String getGenre() {
+//		return genre;
+//	}
+//
+//	public void setGenre(String genre) {
+//		this.genre = genre;
+//	}
+//
+//	public String getNom() {
+//		return nom;
+//	}
+//
+//	public void setNom(String nom) {
+//		this.nom = nom;
+//	}
+//
+//	public String getPrenom() {
+//		return prenom;
+//	}
+//
+//	public void setPrenom(String prenom) {
+//		this.prenom = prenom;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
+//	public String getConfirmPassword() {
+//		return confirmPassword;
+//	}
+//
+//	public void setConfirmPassword(String confirmPassword) {
+//		this.confirmPassword = confirmPassword;
+//	}
+//
+//	public String getTelephone() {
+//		return telephone;
+//	}
+//
+//	public void setTelephone(String telephone) {
+//		this.telephone = telephone;
+//	}
+//
+//	public String getDateNaissance() {
+//		return dateNaissance;
+//	}
+//
+//	public void setDateNaissance(String dateNaissance) {
+//		this.dateNaissance = dateNaissance;
+//	}
 
 	public String getMessageSuccess() {
 		return messageSuccess;
@@ -215,7 +272,5 @@ public class GestionAchatBean implements Serializable {
 	public void setMessageError(String messageError) {
 		this.messageError = messageError;
 	}
-	
-	
-	
+
 }

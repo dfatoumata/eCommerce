@@ -41,6 +41,8 @@ public class Categorie  implements Serializable  {
 	
 	
 	public Categorie() {
+		System.out.println("Categorie");
+
 		articles = new HashSet<Article>();
 	}
 

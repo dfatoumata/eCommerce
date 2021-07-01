@@ -1,8 +1,10 @@
 package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -85,7 +87,7 @@ public class Utilisateur implements Serializable {
 	private Set<CartePaiement> cartePaiements ;
 	
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<ArticlePanier> articlePaniers ;
+	private List<ArticlePanier> panier ;
 	
 	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Commentaire> commentaires  ;
@@ -94,7 +96,7 @@ public class Utilisateur implements Serializable {
 		adresses = new HashSet<Adresse>();
 		commandes = new HashSet<Commande>();
 		cartePaiements = new HashSet<CartePaiement>();
-		articlePaniers = new HashSet<ArticlePanier>();
+		panier = new ArrayList<ArticlePanier>();
 		commentaires = new HashSet<Commentaire>();
 	}
 	
@@ -112,7 +114,7 @@ public class Utilisateur implements Serializable {
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
 		cartePaiements = new HashSet<CartePaiement>();
-		articlePaniers = new HashSet<ArticlePanier>();
+		panier = new ArrayList<ArticlePanier>();
 		commentaires = new HashSet<Commentaire>();
 	}
 
@@ -131,7 +133,7 @@ public class Utilisateur implements Serializable {
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
 		cartePaiements = new HashSet<CartePaiement>();
-		articlePaniers = new HashSet<ArticlePanier>();
+		panier = new ArrayList<ArticlePanier>();
 		commentaires = new HashSet<Commentaire>();
 		
 	}
@@ -152,7 +154,7 @@ public class Utilisateur implements Serializable {
 		adresses = new HashSet<Adresse>();	
 		commandes = new HashSet<Commande>();
 		cartePaiements = new HashSet<CartePaiement>();
-		articlePaniers = new HashSet<ArticlePanier>();
+		panier = new ArrayList<ArticlePanier>();
 		commentaires = new HashSet<Commentaire>();
 
 	}
@@ -250,8 +252,8 @@ public class Utilisateur implements Serializable {
 		return cartePaiements;
 	}
 
-	public Set<ArticlePanier> getArticlePaniers() {
-		return articlePaniers;
+	public List<ArticlePanier> getPanier() {
+		return panier;
 	}
 
 	@Override

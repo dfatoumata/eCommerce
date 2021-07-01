@@ -48,6 +48,8 @@ public class LigneCommande implements Serializable {
 	
 	
 	public LigneCommande() {
+		System.out.println("LigneCommande");
+
 	}
 
 	public LigneCommande(@NotNull Double prixUnitaire, @NotNull Double remiseArticle) {

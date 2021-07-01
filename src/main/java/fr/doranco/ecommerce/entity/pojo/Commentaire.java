@@ -41,6 +41,7 @@ public class Commentaire  implements Serializable {
 	private Article article;
 	
 	public Commentaire() {
+		System.out.println("Commentaire");
 	}
 
 	

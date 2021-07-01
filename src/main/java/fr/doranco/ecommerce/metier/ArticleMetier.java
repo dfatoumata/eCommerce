@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.control;
+package fr.doranco.ecommerce.metier;
 
 import java.util.List;
 
@@ -12,9 +12,7 @@ public class ArticleMetier implements IArticleMetier {
 
 	public ArticleMetier() {
 	}
-	
 
-	
 	@Override
 	public void addArticle(ArticleDto articleDto) throws Exception {
 	
