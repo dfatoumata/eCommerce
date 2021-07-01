@@ -6,17 +6,18 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-
-import com.sun.faces.renderkit.html_basic.HtmlBasicRenderer.Param;
+import javax.faces.bean.SessionScoped;
 
 import fr.doranco.ecommerce.entity.pojo.Params;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.IUtilisateurDao;
+import fr.doranco.ecommerce.model.dao.ParamsDao;
 import fr.doranco.ecommerce.model.dao.UtilisateurDao;
 import fr.doranco.ecommerce.utils.CryptageDesPbeBlowfish;
 
 @ManagedBean(name = "loginBean")
+@SessionScoped
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +26,7 @@ public class LoginBean implements Serializable {
 	private String email;
 	
 	@ManagedProperty(name = "password", value = "")
-	private String motDePasse;
+	private String password;
 	
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess;
@@ -39,29 +40,50 @@ public class LoginBean implements Serializable {
 	public String  seConnecter() {
 		
 		final IUtilisateurDao userDao = new UtilisateurDao();
-		Utilisateur user = userDao.getUtilisateurByEmail(email);
+		Utilisateur user = null;
+		try {
+			user = userDao.getUtilisateurByEmail(email);
+		} catch (Exception e) {
+			messageError = "Email et ou mot de passe incorrect, veuillez reesayer";
+			e.printStackTrace();
+		}
 		String algorithm = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		Params params = new Params();
-		
+
+		ParamsDao paramsDao = new ParamsDao();
+		Params params = null;
+		try {
+			params = paramsDao.get(Params.class, 1);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}		
 		SecretKey cleCryptage = new SecretKeySpec(params.getCleCrypatage(), algorithm);
 		byte[] passwordCrypte = user.getPassword();
-		String passwordDecrypte = CryptageDesPbeBlowfish.decrypt(algorithm, passwordCrypte, cleCryptage);
-		
-		if (motDePasse.equals(passwordDecrypte)) {
-			
+		String passwordDecrypte = null;
+		try {
+			passwordDecrypte = CryptageDesPbeBlowfish.decrypt(algorithm, passwordCrypte, cleCryptage);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
+		if (password.equals(passwordDecrypte) && user.getIsActif()) {
+			
+			if (user.getProfil().equals("C")) {
+				messageSuccess = "Connexion reussie";
+				return "gestion-achats";
+			}
+			if (user.getProfil().equals("M")) {
+				messageSuccess = "Connexion reussie";
+				return "gestion-articles";
+			}
+			if (user.getProfil().equals("A")) {
+				messageSuccess = "Connexion reussie";
+				return "gestion-admin";
+			}
+		}else {
+			messageError = "Email et ou mot de passe incorrect, veuillez reesayer ou creez un compte";
+		}
 		
-		//return password.equals(passwordDecrypte);
-		
-		//...récupérer les email et password saisis
-		//...appeler getUtilisateurByEmail(...)
-		//......si utilisateur inexistant, alors afficher "Email et/ou mot de passe incorrect(s), veuillez réessayer"
-		//...comparer les mots de passe
-		//......si mot de passe incorrect, alors afficher "Email et/ou mot de passe incorrect(s), veuillez réessayer"
-		//...Si correct => redirection à la page de "gestion des achats" si c'est un client, à la page
-		//.......de "gestion admin" si c'est un admin, et à la page "gestion des artciles" si c'est c'est un magasinier
-		// en affichant (pour les 3 cas) le message de succès de connexion.
 		return "";
 	}
 	
@@ -73,12 +95,12 @@ public class LoginBean implements Serializable {
 		this.email = email;
 	}
 
-	public String getMotDePasse() {
-		return motDePasse;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getMessageSuccess() {

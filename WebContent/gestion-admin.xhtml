@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+		<title>Gestion des admins</title>
+	</head>
+	<body>
+	<ui:composition template="resources/template/layout.xhtml">
+			<ui:define name="content">
+	<h3>Bienvenue dans Gestion Admin</h3>
+			<h:form>
+			<table>
+				<tr>
+					<td>Genre :</td>
+					<td>
+						<h:selectOneRadio id="genre" value="#{gestionAdminBean.genre}"
+								required="true" requiredMessage="Le genre est obligatoire">
+							<f:selectItem itemLabel="Mademoiselle" itemValue="MLLE"></f:selectItem>
+							<f:selectItem itemLabel="Madame" itemValue="MME"></f:selectItem>
+							<f:selectItem itemLabel="Monsieur" itemValue="M"></f:selectItem>						
+						</h:selectOneRadio>
+						<h:message for="genre" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td style="color:blue">Id :</td>
+					<td>
+						<h:inputText id="ident" value="#{gestionAdminBean.userId}" readonly="true"
+							style="color:blue" >
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td>Nom :</td>
+					<td>
+						<h:inputText id="nom" required="true" value="#{gestionAdminBean.nom}"
+							requiredMessage="Le nom est obligatoire">
+							<f:validateLength minimum="2" maximum="20"></f:validateLength>
+						</h:inputText>
+						<h:message for="nom" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Prénom :</td>
+					<td>
+						<h:inputText id="prenom" required="true"  value="#{gestionAdminBean.prenom}"
+							requiredMessage="Le prénom est obligatoire">
+							<f:validateLength minimum="2" maximum="20"></f:validateLength>
+						</h:inputText>
+						<h:message for="prenom" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Date Naissance :</td>
+					<td>
+						<h:inputText id="date_naissance" required="true"  value="#{gestionAdminBean.dateNaissance}"
+							requiredMessage="La date de naissance est obligatoire"
+							 placeholder="(jj/mm/aaaa)">
+							<f:validateLength minimum="2" maximum="20"></f:validateLength>
+						</h:inputText>
+						<h:message for="date_naissance" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Email :</td>
+					<td>
+						<h:inputText id="email" required="true" value="#{gestionAdminBean.email}"
+							requiredMessage="L'email est obligatoire">
+							<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
+						</h:inputText>
+						<h:message for="email" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Mot de Passe :</td>
+					<td>
+						<h:inputSecret id="password" required="true"  value="#{gestionAdminBean.password}"
+							requiredMessage="Le mot de passe est obligatoire">
+							<f:validateLength minimum="8" maximum="16"></f:validateLength>
+						</h:inputSecret>
+						<h:message for="password" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Confirmation :</td>
+					<td>
+						<h:inputSecret id="confirmPassword" required="true"  value="#{gestionAdminBean.confirmPassword}"
+							requiredMessage="La confirmation du mot de passe est obligatoire">
+							<f:validateLength minimum="8" maximum="16"></f:validateLength>
+						</h:inputSecret>
+						<h:message for="confirmPassword" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
+					<td>Téléphone :</td>
+					<td>
+						<h:inputText id="telephone" value="#{gestionAdminBean.telephone}">
+							<f:validateLength minimum="10" maximum="15"></f:validateLength>
+						</h:inputText>
+						<h:message for="telephone" style="color:red"></h:message>
+					</td>
+				</tr>
+			</table>
+			<p>
+				<tr>
+					<td>
+						<h:button id="retour" value="Retour" outcome="accueil"></h:button>
+					</td>
+					<td>
+						<h:commandButton id="addUser" value="Ajouter Magasinier"
+							action="#{gestionAdminBean.ajouterMagasinier()}">
+						</h:commandButton>
+					</td>
+					<td>
+						<h:commandButton id="updateUser" value="Ajouter Admin"
+							action="#{gestionAdminBean.ajouterAdmin()}">
+						</h:commandButton>
+					</td>
+				</tr>
+			</p>
+			<p>
+				<h:outputText value="#{gestionAdminBean.messageSuccess}"
+					style="color:green"></h:outputText>
+				<h:outputText value="#{gestionAdminBean.messageError}"
+					style="color:red"></h:outputText>
+			</p>
+		</h:form>
+
+		</ui:define>
+			</ui:composition>
+	</body>
+</html>

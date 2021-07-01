@@ -6,50 +6,60 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Se Connecter</title>
-	</head>
-	<body>
-		<ui:composition template="resources/template/layout.xhtml">
-			<ui:define name="content">
-				<h:form>
-					<h:panelGrid columns="1" cellpadding="0" cellspacing="2">
-					
-						<h:outputLabel value="Email :"></h:outputLabel>
-						<h:inputText id="email" required="true" value="#{loginBean.email}">
-							<f:validateLength minimum="8" maximum="25"></f:validateLength>
-						</h:inputText>
-						
-						<h:outputLabel value="Password :"></h:outputLabel>
-						<h:inputText id="password" required="true"  value="#{loginBean.motDePasse}">
-							<f:validateLength minimum="8" maximum="16"></f:validateLength>
-						</h:inputText>
-						<h:message for="password" style="color:red"></h:message>
-						
-					</h:panelGrid>
-					<p>
-						<tr>
-							<td>
-								<p:button type="button" title="Retour" value = "Retour" 
-						icon="pi pi-home" styleClass="warn-button p-mr-2" outcome="accueil" />
-							</td>
-							<td>
-							<p:commandButton type="button" title="Se connecter" value = "Se connecter" 
-						icon="pi pi-lock-open" styleClass="warn-button p-mr-2" action="#{loginBean.seConnecter()}" />
-							</td>
-						</tr>
-					</p>
-				</h:form>
-				
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Se Connecter</title>
+</head>
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<table>
+					<tr>
+						<td>Email :</td>
+						<td><h:inputText id="email" required="true"
+								value="#{loginBean.email}"
+								requiredMessage="L'email est obligatoire">
+								<f:validateRegex
+									pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
+							</h:inputText> <h:message for="email" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Mot de Passe :</td>
+						<td><h:inputSecret id="password" required="true"
+								value="#{loginBean.password}"
+								requiredMessage="Le mot de passe est obligatoire">
+							</h:inputSecret> <h:message for="password" style="color:red"></h:message></td>
+					</tr>
+				</table>
 				<p>
-					<h:link id="mdp-oublie" value="Mot de passe oublié ?" outcome="forget-mdp"></h:link>
+					<tr>
+						<td><p:button type="button" title="Retour" value="Retour"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="accueil" /></td>
+						<td>
+								
+								<h:commandButton
+								id="seConnecter" value="Se connecter" 
+								action="#{loginBean.seConnecter()}">
+							</h:commandButton></td>
+
+
+					</tr>
 				</p>
-				<p>Pas encore de compte ?
-					<h:link id="sinscrire" value="Créez un compte" outcome="utilisateurs"></h:link>
-				</p>
-			</ui:define>
-		</ui:composition>
-	</body>
+			</h:form>
+
+			<p>
+				<h:link id="mdp-oublie" value="Mot de passe oublié ?"
+					outcome="forget-mdp"></h:link>
+			</p>
+			<p>
+				Pas encore de compte ?
+				<h:link id="sinscrire" value="Créez un compte"
+					outcome="utilisateurs"></h:link>
+			</p>
+		</ui:define>
+	</ui:composition>
+</body>
 </html>

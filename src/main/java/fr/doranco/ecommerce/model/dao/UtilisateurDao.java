@@ -22,6 +22,12 @@ public UtilisateurDao() {
 //	}
 
 	@Override
+	public void add(Utilisateur entity) throws Exception {
+		// TODO Auto-generated method stub
+		super.add(entity);
+	}
+
+	@Override
 	public Utilisateur getUtilisateurByEmail(String email) {
 		Session session = HibernateConnector.getInstance().getSession();
 		Query<Utilisateur> query = session.createQuery(

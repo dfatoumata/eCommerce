@@ -68,11 +68,7 @@ public class Commande implements Serializable {
 	
 	
 	@OneToOne(cascade=CascadeType.ALL)
-<<<<<<< HEAD
     @JoinColumn(name="adresse_facturation_id" )
-=======
-    @JoinColumn(name="adresse_facturation_id")
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 	private Adresse adresseFacturation;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
