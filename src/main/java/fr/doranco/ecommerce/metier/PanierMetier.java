@@ -11,7 +11,9 @@ import fr.doranco.ecommerce.model.dao.UtilisateurDao;
 public class PanierMetier implements IPanierMetier {
 
 	PanierDao articlePanierDao = new PanierDao();
-
+public PanierMetier() {
+	// TODO Auto-generated constructor stub
+}
 	@Override
 	public void addArticle(ArticlePanierDto articlePanierDto, Integer idUtilisateur, Integer idArticle)
 			throws Exception {
@@ -41,32 +43,32 @@ public class PanierMetier implements IPanierMetier {
 	}
 
 	@Override
-	public void updateArticlePanier(ArticlePanierDto articlePanierDto, Integer idUtilisateur, Integer idArticle)
+	public void updateArticlePanier(ArticlePanier articlePanierDto, Integer idUtilisateur, Integer idArticle)
 			throws Exception {
-		ArticlePanier articlePanier = new ArticlePanier();
+//		ArticlePanier articlePanier = new ArticlePanier();
+//
+//		PanierDao articlePanierDao = new PanierDao();
+//
+//		UtilisateurDao utilisateurDao = new UtilisateurDao();
+//
+//		Utilisateur utilisateur = utilisateurDao.get(Utilisateur.class, idUtilisateur);
+//
+//		articlePanier.setUtilisateur(utilisateur);
+//
+//		ArticleDao articleDao = new ArticleDao();
+//
+//		Article article = articleDao.get(Article.class, idArticle);
+//
+//		articlePanier.setArticle(article);
 
-		PanierDao articlePanierDao = new PanierDao();
-
-		UtilisateurDao utilisateurDao = new UtilisateurDao();
-
-		Utilisateur utilisateur = utilisateurDao.get(Utilisateur.class, idUtilisateur);
-
-		articlePanier.setUtilisateur(utilisateur);
-
-		ArticleDao articleDao = new ArticleDao();
-
-		Article article = articleDao.get(Article.class, idArticle);
-
-		articlePanier.setArticle(article);
-
-		articlePanierDao.update(articlePanier);
+		articlePanierDao.update(articlePanierDto);
 
 	}
 
 	@Override
-	public void removeArticlePanier(ArticlePanierDto articlePanierDto) throws Exception {
-		ArticlePanier articlePanier = new ArticlePanier();
-		articlePanierDao.remove(articlePanier);
+	public void removeArticlePanier(ArticlePanier articlePanierDto) throws Exception {
+//		ArticlePanier articlePanier = new ArticlePanier();
+		articlePanierDao.remove(articlePanierDto);
 
 	}
 

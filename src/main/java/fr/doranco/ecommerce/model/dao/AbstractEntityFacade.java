@@ -52,12 +52,13 @@ public abstract class AbstractEntityFacade<T> implements IEntityFacade<T> {
 	public void update(T entity) throws Exception {
 		Session session = HibernateConnector.getInstance().getSession();
 		Transaction tx = session.beginTransaction();
-		session.update(entity);
+		 session.merge(entity);
+//		Object mergedEntity = session.merge(entity);
+//		session.saveOrUpdate(mergedEntity);		
 		tx.commit();
 		if (session != null && session.isOpen()) {
 			session.close();
-		}
-	}
+		}}
 
 	@Override
 	public void remove(T entity) throws Exception {

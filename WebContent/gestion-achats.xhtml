@@ -17,7 +17,7 @@
 			<h:form>
 				<h4>Liste des articles</h4>
 				
-						<p:button type="button" title="AjouterAdresse" value="Ajoute une adresse de facturation"
+						<p:button type="button" title="Ajouter Adresse" value="Ajoute une adresse de facturation"
 								icon="pi pi-home" styleClass="warn-button p-mr-2"
 								outcome="ajouter-adresse" />
 						
@@ -65,17 +65,15 @@
 						<h:outputText value="#{a.stock}"></h:outputText>
 					</h:column>
 
-					<h:column>
-						<f:facet name="header">Categorie</f:facet>
-						<h:outputText value="#{a.categorie.nom}"></h:outputText>
-					</h:column>
-
 				<h:column>
 					<f:facet name="header">Ajouter au panier</f:facet>
 					<h:commandButton value="Ajouter au panier" action="#{gestionAchatBean.ajouterAuPanier(a,quatite.value)}"></h:commandButton>
 				</h:column>
-				</h:dataTable>				
-
+				</h:dataTable>	
+							
+				<p:button type="button" title="Voir le panier" value="Voir le panier"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="panier" />
 			</h:form>
 		</ui:define>
 	</ui:composition>
