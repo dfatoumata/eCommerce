@@ -1,5 +1,6 @@
 package fr.doranco.ecommerce.metier;
 
+import java.util.List;
 import java.util.Set;
 
 import fr.doranco.ecommerce.entity.dto.AdresseDto;
@@ -13,6 +14,6 @@ public interface IAdresseMetier {
 	void updateAdresse(AdresseDto adresseDto) throws Exception;
 	void removeAdresse(Adresse adresse) throws Exception;
 	
-	Set<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception;
+	List<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception;
 
 }

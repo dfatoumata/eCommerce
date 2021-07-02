@@ -12,7 +12,9 @@ import fr.doranco.ecommerce.entity.pojo.Adresse;
 import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.metier.AdresseMetier;
 import fr.doranco.ecommerce.metier.ArticleMetier;
+import fr.doranco.ecommerce.metier.IAdresseMetier;
 import fr.doranco.ecommerce.metier.IArticleMetier;
 import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.UtilisateurMetier;
@@ -23,65 +25,54 @@ public class AjouterAdresseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-//	@ManagedProperty(name = "id", value = "")
-//	private String id;
-//	@ManagedProperty(name = "nom", value = "")
-//	private String nom;
-//	@ManagedProperty(name = "description", value = "")
-//	private String description;
-//	@ManagedProperty(name = "prix", value = "")
-//	private String prix;
-//	@ManagedProperty(name = "remise", value = "")
-//	private String remise;
-//	@ManagedProperty(name = "stock", value = "")
-//	private String stock;
-//	@ManagedProperty(name = "isVendable", value = "")
-//	private String isVendable;
+	@ManagedProperty(name = "id", value = "")
+	private String id;
+    @ManagedProperty(name = "numero", value = "")
+    private String numero;
+    @ManagedProperty(name = "rue", value = "")
+    private String rue;
+    @ManagedProperty(name = "ville", value = "")
+	private String ville;
+    
+	public String getNumero() {
+		return numero;
+	}
 
-//	@ManagedProperty(name = "articleId", value = "")
-//	private String articleId;
-//	@ManagedProperty(name = "articleNom", value = "")
-//	private String articleNom;
-//	@ManagedProperty(name = "articleDescription", value = "")
-//	private String articleDescription;
-//	@ManagedProperty(name = "articlePrix", value = "")
-//	private String articlePrix;
-//	@ManagedProperty(name = "articleRemise", value = "")
-//	private String articleRemise;
-//	@ManagedProperty(name = "articleStock", value = "")
-//	private String articleStock;
-//	@ManagedProperty(name = "articleIsVendable", value = "")
-//	private String articleIsVendable;
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-//	@ManagedProperty(name = "userId", value = "")
-//	private String userId;
-//	
-//	@ManagedProperty(name = "genre", value = "")
-//	private String genre;
-//	
-//	@ManagedProperty(name = "nom", value = "")
-//	private String nom;
-//	
-//	@ManagedProperty(name = "prenom", value = "")
-//	private String prenom;
-//	
-//	@ManagedProperty(name = "email", value = "")
-//	private String email;
-//	
-//	@ManagedProperty(name = "password", value = "")
-//	private String password;
-//	
-//	@ManagedProperty(name = "confirmPassword", value = "")
-//	private String confirmPassword;
-//	
-//	@ManagedProperty(name = "telephone", value = "")
-//	private String telephone;
-//	
-//	@ManagedProperty(name = "dateNaissance", value = "")
-//	private String dateNaissance;
-	
-//	@ManagedProperty(name = "quantite", value = "")
-//	private String quantite = " ";
+	public String getRue() {
+		return rue;
+	}
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getCode_postal() {
+		return code_postal;
+	}
+
+	public void setCode_postal(String code_postal) {
+		this.code_postal = code_postal;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	@ManagedProperty(name = "code_postal", value = "")
+    private String code_postal;
+
 	
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess = " ";
@@ -92,7 +83,7 @@ public class AjouterAdresseBean implements Serializable {
 	public AjouterAdresseBean() {
 	}
 
-	String ajouterAdresse(Adresse adresse) {
+	public String ajouterAdresse(Adresse adresse) {
 		Utilisateur user = LoginBean.getConnectedUser();
 		user.getAdresses().add(adresse);
 
@@ -107,19 +98,24 @@ public class AjouterAdresseBean implements Serializable {
 		return "";
 	}
 
-	public List<Article> getArticles() {
+	public List<Adresse> getAdresses() {
 
-		IArticleMetier articleMetier = new ArticleMetier();
-
-		List<Article> articles = new ArrayList<Article>();
+		
+		IAdresseMetier adresseMetier = new AdresseMetier();
+		
+		Utilisateur user = LoginBean.getConnectedUser();
+		
+		Integer idUser= user.getId();
+		
+		List<Adresse> adresses = new ArrayList<Adresse>();
 		try {
-			articles = articleMetier.getArticles();
+			adresses = adresseMetier.getAdressesUtilisateur(idUser);
 		} catch (Exception e) {
 			messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
 			e.printStackTrace();
 		}
 
-		return articles;
+		return adresses;
 	}
 
 //	public String ajouterAuPanier() {

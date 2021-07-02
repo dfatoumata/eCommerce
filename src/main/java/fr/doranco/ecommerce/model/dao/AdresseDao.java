@@ -19,6 +19,7 @@ public class AdresseDao extends AbstractEntityFacade<Adresse> implements IAdress
 		return query.getResultList();
 	}
 
+	
 	@Override
 	public List<String> getNomsVillesUtilisateurs() throws Exception {
 		Session session = HibernateConnector.getInstance().getSession();
@@ -26,8 +27,5 @@ public class AdresseDao extends AbstractEntityFacade<Adresse> implements IAdress
 				String.class);
 		return query.getResultList();
 	}
-
-
-
 
 }

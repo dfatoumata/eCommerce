@@ -20,81 +20,43 @@
 				<tr>
 					<td>Numero :</td>
 					<td>
-						<h:inputText id="ident" value="#{userBean.userId}" >
+						<h:inputText id="numero" value="#{ajouterAdresseBean.numero}" >
 						</h:inputText>
 					</td>
 				</tr>
 				<tr>
-					<td>Nom :</td>
+					<td>Rue :</td>
 					<td>
-						<h:inputText id="nom" required="true" value="#{userBean.nom}"
-							requiredMessage="Le nom est obligatoire">
+						<h:inputText id="nom" required="true" value="#{ajouterAdresseBean.rue}"
+							requiredMessage="La rue est obligatoire">
 							<f:validateLength minimum="2" maximum="20"></f:validateLength>
 						</h:inputText>
 						<h:message for="nom" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
-					<td>Prénom :</td>
+					<td>Ville :</td>
 					<td>
-						<h:inputText id="prenom" required="true"  value="#{userBean.prenom}"
-							requiredMessage="Le prénom est obligatoire">
+						<h:inputText id="ville" required="true"  value="#{ajouterAdresseBean.ville}"
+							requiredMessage="la ville est obligatoire">
 							<f:validateLength minimum="2" maximum="20"></f:validateLength>
 						</h:inputText>
 						<h:message for="prenom" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
-					<td>Date Naissance :</td>
+					<td>Code postale</td>
 					<td>
-						<h:inputText id="date_naissance" required="true"  value="#{userBean.dateNaissance}"
-							requiredMessage="La date de naissance est obligatoire"
+						<h:inputText id="code_postal" required="true"  value="#{ajouterAdresseBean.code_postal}"
+							requiredMessage="Le code postal est obligatoire"
 							 placeholder="(jj/mm/aaaa)">
 							<f:validateLength minimum="2" maximum="20"></f:validateLength>
 						</h:inputText>
-						<h:message for="date_naissance" style="color:red"></h:message>
+						<h:message for="code_postal" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
-					<td>Email :</td>
-					<td>
-						<h:inputText id="email" required="true" value="#{userBean.email}"
-							requiredMessage="L'email est obligatoire">
-							<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"></f:validateRegex>
-						</h:inputText>
-						<h:message for="email" style="color:red"></h:message>
-					</td>
-				</tr>
-				<tr>
-					<td>Mot de Passe :</td>
-					<td>
-						<h:inputSecret id="password" required="true"  value="#{userBean.password}"
-							requiredMessage="Le mot de passe est obligatoire">
-							<f:validateLength minimum="8" maximum="16"></f:validateLength>
-						</h:inputSecret>
-						<h:message for="password" style="color:red"></h:message>
-					</td>
-				</tr>
-				<tr>
-					<td>Confirmation :</td>
-					<td>
-						<h:inputSecret id="confirmPassword" required="true"  value="#{userBean.confirmPassword}"
-							requiredMessage="La confirmation du mot de passe est obligatoire">
-							<f:validateLength minimum="8" maximum="16"></f:validateLength>
-						</h:inputSecret>
-						<h:message for="confirmPassword" style="color:red"></h:message>
-					</td>
-				</tr>
-				<tr>
-					<td>Téléphone :</td>
-					<td>
-						<h:inputText id="telephone" value="#{userBean.telephone}">
-							<f:validateLength minimum="10" maximum="15"></f:validateLength>
-						</h:inputText>
-						<h:message for="telephone" style="color:red"></h:message>
-					</td>
-				</tr>
-			</table>
+					
 			<p>
 				<tr>
 					<td>

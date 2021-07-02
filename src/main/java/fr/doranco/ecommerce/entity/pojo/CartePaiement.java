@@ -37,7 +37,7 @@ public class CartePaiement implements Serializable {
 	
 	@NotEmpty
 	@Column(name = "numero", length = 25, nullable = false)
-	private Integer numero;
+	private byte[] numero;
 
 	@NotNull
 	@Column(name = "date_Fin_Validite", nullable = false)
@@ -46,7 +46,7 @@ public class CartePaiement implements Serializable {
 	
 	@NotEmpty
 	@Column(name = "cryptogramme", length = 40, nullable = false)
-	private String cryptogramme;
+	private byte[] cryptogramme;
 	
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
