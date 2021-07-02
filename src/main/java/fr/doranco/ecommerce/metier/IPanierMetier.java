@@ -9,9 +9,11 @@ public interface IPanierMetier {
 
 	ArticlePanier getArticlePanierById(Integer id) throws Exception;
 
-	void updateArticlePanier(ArticlePanierDto articlePanierDto, Integer idUtilisateur, Integer idArticle)
+	void updateArticlePanier(ArticlePanier articlePanier, Integer idUtilisateur, Integer idArticle)
 			throws Exception;
 
-	void removeArticlePanier(ArticlePanierDto articlePanierDto) throws Exception;
+
+
+	void removeArticlePanier(ArticlePanier articlePanierDto) throws Exception;
 
 }
