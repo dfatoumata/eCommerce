@@ -77,7 +77,7 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 
 	}
 
-	@Override
+	@Override²	
 	public void removeUtilisateur(UtilisateurDto utilisateurDto) throws Exception {
 		
 		utilisateurDao.remove(utilisateur);

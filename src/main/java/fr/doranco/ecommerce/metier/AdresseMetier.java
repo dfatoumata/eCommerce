@@ -1,5 +1,6 @@
 package fr.doranco.ecommerce.metier;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Convert;
@@ -54,7 +55,7 @@ public class AdresseMetier implements IAdresseMetier {
 	}
 
 	@Override
-	public Set<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception {
+	public List<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception {
 		//adresseDao.getAdressesUtilisateur(idUtilisateur);
 		return null;
 	}

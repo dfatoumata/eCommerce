@@ -31,7 +31,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		
 		byte[] numeroCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, cartePaiementDto.getNumero(), key);
 		cartePaiement.setNumero(numeroCrypte);
-		
+		byte[] numeroCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, cartePaiementDto.getNumero(), key);
+		cartePaiement.setNumero(numeroCrypte);	
 		
 		@Override
 	
