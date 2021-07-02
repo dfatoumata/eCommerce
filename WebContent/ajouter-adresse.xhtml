@@ -9,14 +9,18 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Ajouter une adresse</title>
+<title>Ajouter une adresse de facturation</title>
 </head>
 <body>
 	<ui:composition template="resources/template/layout.xhtml">
 		<ui:define name="content">
-	
 			<h:form>
+										
+				<p:button type="button" title="Voir les articles" value="Voir les articles"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="gestion-achats" />
 			<table>
+
 				<tr>
 					<td>Numero :</td>
 					<td>
@@ -41,22 +45,20 @@
 							requiredMessage="la ville est obligatoire">
 							<f:validateLength minimum="2" maximum="20"></f:validateLength>
 						</h:inputText>
-						<h:message for="prenom" style="color:red"></h:message>
+						<h:message for="ville" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
 					<td>Code postale</td>
 					<td>
 						<h:inputText id="code_postal" required="true"  value="#{ajouterAdresseBean.code_postal}"
-							requiredMessage="Le code postal est obligatoire"
-							 placeholder="(jj/mm/aaaa)">
+							requiredMessage="Le code postal est obligatoire">
 							<f:validateLength minimum="2" maximum="20"></f:validateLength>
 						</h:inputText>
 						<h:message for="code_postal" style="color:red"></h:message>
 					</td>
 				</tr>
-				<tr>
-					
+				</table>	
 			<p>
 				<tr>
 					<td>
@@ -64,22 +66,18 @@
 					</td>
 					<td>
 						<h:commandButton id="addAdresse" value="Ajouter une adresse"
-							action="#{ajouterAdresseBean.}">
-						</h:commandButton>
-					</td>
-					<td>
-						<h:commandButton id="updateUser" value="mettre à jour Utilisateur"
-							action="#{userBean.updateUtilisateur()}">
+							action="#{ajouterAdresseBean.ajouterAdresse()}">
 						</h:commandButton>
 					</td>
 				</tr>
 			</p>
 			<p>
-				<h:outputText value="#{userBean.messageSuccess}"
+				<h:outputText value="#{ajouterAdresseBean.messageSuccess}"
 					style="color:green"></h:outputText>
-				<h:outputText value="#{userBean.messageError}"
+				<h:outputText value="#{ajouterAdresseBean.messageError}"
 					style="color:red"></h:outputText>
 			</p>
+			
 		</h:form>
 
 		</ui:define>

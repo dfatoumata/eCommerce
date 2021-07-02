@@ -29,18 +29,15 @@ public class Adresse implements Serializable {
 	private Integer numero;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
 	
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "ville", length = 20, nullable = false)
 	private String ville;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "code_postal", length = 5, nullable = false)
 	private String codePostal;
 

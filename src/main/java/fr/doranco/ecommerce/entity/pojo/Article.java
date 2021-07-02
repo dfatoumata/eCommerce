@@ -199,6 +199,12 @@ public class Article  implements Serializable  {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", nom=" + nom + ", prix=" + prix + ", stock=" + stock + "]";
+	}
+
+
 	
 
 }

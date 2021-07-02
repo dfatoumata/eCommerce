@@ -1,22 +1,16 @@
 package fr.doranco.ecommerce.vue;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
-import fr.doranco.ecommerce.metier.ArticleMetier;
-import fr.doranco.ecommerce.metier.IArticleMetier;
 import fr.doranco.ecommerce.metier.IPanierMetier;
-import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.PanierMetier;
-import fr.doranco.ecommerce.metier.UtilisateurMetier;
 
 @ManagedBean(name = "panierBean")
 @SessionScoped
@@ -36,8 +30,18 @@ public class PanierBean implements Serializable {
 	}
 
 	public List<ArticlePanier> afficherPanierByUser() {
+		IPanierMetier panierMetier = new PanierMetier();
+		List<ArticlePanier> articlePaniers = null;
 
-		return user.getPanier();
+		try {
+			articlePaniers = panierMetier.getPanierByUser(user.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		user.
+		return articlePaniers;
 	}
 
 	public String supprimerArticlePanier(ArticlePanier articlePanier) {
@@ -45,7 +49,8 @@ public class PanierBean implements Serializable {
 		IPanierMetier panierMetier = new PanierMetier();
 
 		try {
-			panierMetier.removeArticlePanier(articlePanier);;
+			panierMetier.removeArticlePanier(articlePanier);
+			;
 			messageSuccess = "Article supprimé avec succès du panier";
 			// afficher un popup indiquant que l'article a été ajouté au panier
 		} catch (Exception e) {
@@ -54,7 +59,6 @@ public class PanierBean implements Serializable {
 		}
 		return "";
 	}
-
 
 	public String getMessageSuccess() {
 		return messageSuccess;

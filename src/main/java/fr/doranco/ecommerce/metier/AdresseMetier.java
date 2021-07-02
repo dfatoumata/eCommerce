@@ -25,7 +25,7 @@ public class AdresseMetier implements IAdresseMetier {
 		Adresse adresse = new Adresse();
 		
 		adresse.setNumero(Integer.parseInt(adresseDto.getNumero()));
-		adresse.setVille(adresseDto.getRue().toUpperCase());
+		adresse.setRue(adresseDto.getRue().toUpperCase());
 		adresse.setVille(adresseDto.getVille().toUpperCase());
 		adresse.setCodePostal(adresseDto.getCodePostal());
 		UtilisateurDao utilisateurDao = new UtilisateurDao();

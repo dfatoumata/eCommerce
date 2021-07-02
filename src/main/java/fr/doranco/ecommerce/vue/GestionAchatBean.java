@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import fr.doranco.ecommerce.entity.dto.ArticlePanierDto;
 import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
@@ -17,12 +18,16 @@ import fr.doranco.ecommerce.metier.IPanierMetier;
 import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.PanierMetier;
 import fr.doranco.ecommerce.metier.UtilisateurMetier;
+import fr.doranco.ecommerce.model.dao.PanierDao;
 
 @ManagedBean(name = "gestionAchatBean")
 @SessionScoped
 public class GestionAchatBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	private IPanierMetier panierMetier = new PanierMetier();
+	private IUtilisateurMetier userMetier = new UtilisateurMetier();
 
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess = " ";
@@ -36,26 +41,74 @@ public class GestionAchatBean implements Serializable {
 
 	public String ajouterAuPanier(Article article, String quantite) {
 
+		System.out.println(user.getPanier());
 		Integer qte = Integer.valueOf(quantite);
 
+		ArticlePanier articlePanier = null;
+		boolean isFound = false;
+		
+		for (ArticlePanier ap : user.getPanier()) {
+			if (ap.getArticle().getId().equals(article.getId())) {
+				articlePanier = ap;
+				isFound = true;
+			}
+		}
+		if (isFound) {
+			Integer indexArticlePanier = user.getPanier().indexOf(articlePanier);
+			articlePanier.setQuantite(articlePanier.getQuantite() + qte);
+			user.getPanier().set(indexArticlePanier, articlePanier);
+
+		} else {
+			ArticlePanier newArticlePanier = new ArticlePanier(article, Integer.valueOf(quantite));
+			user.getPanier().add(newArticlePanier);
+		}
+
+		try
+
+		{
+			userMetier.updateUtilisateur(user);
+			messageSuccess = "Article ajouté avec succès au panier";
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
+			return "";
+		}
+
+		return "";
+	}
+	
+	
+	public String ajouterAuPanier2(Article article, String quantite) {
+
+		System.out.println(user.getPanier());
+		Integer qte = Integer.valueOf(quantite);
 		ArticlePanier articlePanier = new ArticlePanier();
 		articlePanier.setArticle(article);
 		articlePanier.setUtilisateur(user);
-		
-//		if (user.getPanier().contains(articlePanier)) {
-//			Integer oldQuantite = user.getPanier().get(user.getPanier().indexOf(articlePanier)).getQuantite();
-//			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
-//		}
-		Boolean IsArticleIdentiqueDansUserPanier = false ;
-		
-		for (ArticlePanier articleP : user.getPanier()) {
 
-			if (article.getId().equals(articleP.getArticle().getId()) && articlePanier.getUtilisateur().getId().equals(articleP.getUtilisateur().getId())) {
+		if (user.getPanier().contains(articlePanier)) {
+			Integer oldQuantite = user.getPanier().get(user.getPanier().indexOf(articlePanier)).getQuantite();
+			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
+		}
+		Boolean IsArticleIdentiqueDansUserPanier = false;
+
+		List<ArticlePanier> articlePaniers = null;
+		try {
+			articlePaniers = panierMetier.getPanierByUser(user.getId());
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		for (ArticlePanier articleP : articlePaniers) {
+
+			if (article.getId().equals(articleP.getArticle().getId())
+					&& articlePanier.getUtilisateur().getId().equals(articleP.getUtilisateur().getId())) {
 				Integer oldQuantite = articleP.getQuantite();
 				articlePanier.setQuantite(qte + oldQuantite);
-				int index = user.getPanier().indexOf(articleP);
-				
-				user.getPanier().set(index, articlePanier);
+				int index = articlePaniers.indexOf(articleP);
+
+				articlePaniers.set(index, articlePanier);
 				IsArticleIdentiqueDansUserPanier = true;
 
 			}
@@ -63,27 +116,24 @@ public class GestionAchatBean implements Serializable {
 
 		if (!IsArticleIdentiqueDansUserPanier) {
 			articlePanier.setQuantite(qte);
-			user.getPanier().add(articlePanier);
-		}
-		
-		user.getPanier().remove(articlePanier);
-		IPanierMetier panierMetier = new PanierMetier();
 
-//		try {
-//			panierMetier.removeArticlePanier(articlePanier);
-			
-		IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
-		
-		try {
-			utilisateurMetier.updateUtilisateur(user);
+			articlePaniers.add(articlePanier);
+		}
+
+		try
+
+		{
+			panierMetier.updateArticlePanier(articlePanier);
 			messageSuccess = "Article ajouté avec succès au panier";
-			// afficher un popup indiquant que l'article a été ajouté au panier
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
 			return "";
 		}
+
 		return "";
 	}
+
 
 	public List<Article> getArticles() {
 
@@ -99,7 +149,6 @@ public class GestionAchatBean implements Serializable {
 
 		return articles;
 	}
-
 
 	public String getMessageSuccess() {
 		return messageSuccess;

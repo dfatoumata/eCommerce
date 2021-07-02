@@ -1,19 +1,21 @@
 package fr.doranco.ecommerce.entity.dto;
 
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+
 public class AdresseDto {
 	private String id;
 	private String numero;
 	private String rue;
 	private String ville;
 	private String codePostal;
-	private String utilisateur;
+	private Utilisateur utilisateur;
 	
 	public AdresseDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdresseDto(String id, String numero, String rue, String ville, String codePostal, String utilisateur) {
+	public AdresseDto(String id, String numero, String rue, String ville, String codePostal, Utilisateur utilisateur) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -23,7 +25,7 @@ public class AdresseDto {
 		this.utilisateur = utilisateur;
 	}
 
-	public AdresseDto(String numero, String rue, String ville, String codePostal, String utilisateur) {
+	public AdresseDto(String numero, String rue, String ville, String codePostal, Utilisateur utilisateur) {
 		super();
 		this.numero = numero;
 		this.rue = rue;
@@ -72,11 +74,11 @@ public class AdresseDto {
 		this.codePostal = codePostal;
 	}
 
-	public String getUtilisateur() {
+	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
-	public void setUtilisateur(String utilisateur) {
+	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 

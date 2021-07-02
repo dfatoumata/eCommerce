@@ -8,16 +8,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import fr.doranco.ecommerce.entity.dto.AdresseDto;
 import fr.doranco.ecommerce.entity.pojo.Adresse;
-import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
+import fr.doranco.ecommerce.entity.pojo.Commande;
+import fr.doranco.ecommerce.entity.pojo.LigneCommande;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.metier.AdresseMetier;
-import fr.doranco.ecommerce.metier.ArticleMetier;
 import fr.doranco.ecommerce.metier.IAdresseMetier;
-import fr.doranco.ecommerce.metier.IArticleMetier;
-import fr.doranco.ecommerce.metier.IUtilisateurMetier;
-import fr.doranco.ecommerce.metier.UtilisateurMetier;
 
 @ManagedBean(name = "ajouterAdresseBean")
 @SessionScoped
@@ -25,15 +23,28 @@ public class AjouterAdresseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(name = "id", value = "")
 	private String id;
-    @ManagedProperty(name = "numero", value = "")
-    private String numero;
-    @ManagedProperty(name = "rue", value = "")
-    private String rue;
-    @ManagedProperty(name = "ville", value = "")
+
+	@ManagedProperty(name = "numero", value = "")
+	private String numero;
+
+	@ManagedProperty(name = "rue", value = "")
+	private String rue;
+
+	@ManagedProperty(name = "ville", value = "")
 	private String ville;
-    
+
+	@ManagedProperty(name = "code_postal", value = "")
+	private String code_postal;
+
+	@ManagedProperty(name = "messageSuccess", value = "")
+	private String messageSuccess = " ";
+
+	@ManagedProperty(name = "messageError", value = "")
+	private String messageError = " ";
+
+	Utilisateur user = LoginBean.getConnectedUser();
+
 	public String getNumero() {
 		return numero;
 	}
@@ -70,27 +81,43 @@ public class AjouterAdresseBean implements Serializable {
 		return id;
 	}
 
-	@ManagedProperty(name = "code_postal", value = "")
-    private String code_postal;
-
-	
-	@ManagedProperty(name = "messageSuccess", value = "")
-	private String messageSuccess = " ";
-
-	@ManagedProperty(name = "messageError", value = "")
-	private String messageError = " ";
-
 	public AjouterAdresseBean() {
 	}
 
-	public String ajouterAdresse(Adresse adresse) {
-		Utilisateur user = LoginBean.getConnectedUser();
-		user.getAdresses().add(adresse);
+	public String ajouterAdresse() {
 
-		IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
+		AdresseDto adresse = new AdresseDto();
+		adresse.setNumero(numero);
+		adresse.setRue(rue);
+		adresse.setVille(ville);
+		adresse.setCodePostal(code_postal);
+		adresse.setUtilisateur(user);
+		
+		Adresse adresseN = new Adresse();
+		
+		adresseN.setNumero(Integer.parseInt(adresse.getNumero()));
+		adresseN.setRue(adresse.getRue().toUpperCase());
+		adresseN.setVille(adresse.getVille().toUpperCase());
+		adresseN.setCodePostal(adresse.getCodePostal());
+		
+		
+		
+		adresseN.setUtilisateur(user);
+
+		IAdresseMetier adresseMetier = new AdresseMetier();
+
 		try {
-			utilisateurMetier.updateUtilisateur(user);
-			// afficher un popup indiquant que l'article a été ajouté au panier
+			
+			adresseMetier.addAdresse(adresse, user.getId());
+
+			Commande Commande = new Commande();
+			Commande.setAdresseFacturation()
+			user.getCommandes();
+			for (Commande Commande  : user.getCommandes()) {
+				Commande.setAdresseFacturation(adresse);
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
@@ -100,13 +127,12 @@ public class AjouterAdresseBean implements Serializable {
 
 	public List<Adresse> getAdresses() {
 
-		
 		IAdresseMetier adresseMetier = new AdresseMetier();
-		
+
 		Utilisateur user = LoginBean.getConnectedUser();
-		
-		Integer idUser= user.getId();
-		
+
+		Integer idUser = user.getId();
+
 		List<Adresse> adresses = new ArrayList<Adresse>();
 		try {
 			adresses = adresseMetier.getAdressesUtilisateur(idUser);
@@ -169,86 +195,12 @@ public class AjouterAdresseBean implements Serializable {
 //	}
 //	
 
-	public String seConnecter() {
-
-		return "";
-	}
-
-//
-//	public String getUserId() {
-//		return userId;
-//	}
-//
-//	public void setUserId(String userId) {
-//		this.userId = userId;
-//	}
-//
-//	public String getGenre() {
-//		return genre;
-//	}
-//
-//	public void setGenre(String genre) {
-//		this.genre = genre;
-//	}
-//
-//	public String getNom() {
-//		return nom;
-//	}
-//
-//	public void setNom(String nom) {
-//		this.nom = nom;
-//	}
-//
-//	public String getPrenom() {
-//		return prenom;
-//	}
-//
-//	public void setPrenom(String prenom) {
-//		this.prenom = prenom;
-//	}
-//
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-//
-//	public String getPassword() {
-//		return password;
-//	}
-//
-//	public void setPassword(String password) {
-//		this.password = password;
-//	}
-//
-//	public String getConfirmPassword() {
-//		return confirmPassword;
-//	}
-//
-//	public void setConfirmPassword(String confirmPassword) {
-//		this.confirmPassword = confirmPassword;
-//	}
-//
-//	public String getTelephone() {
-//		return telephone;
-//	}
-//
-//	public void setTelephone(String telephone) {
-//		this.telephone = telephone;
-//	}
-//
-//	public String getDateNaissance() {
-//		return dateNaissance;
-//	}
-//
-//	public void setDateNaissance(String dateNaissance) {
-//		this.dateNaissance = dateNaissance;
-//	}
-
 	public String getMessageSuccess() {
 		return messageSuccess;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setMessageSuccess(String messageSuccess) {

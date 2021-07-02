@@ -66,32 +66,42 @@ public class UtilisateurMetier implements IUtilisateurMetier {
 
 	@Override
 	public UtilisateurDto getUtilisateurByEmail(String email) throws Exception {
-		// TODO Auto-generated method stub
-		return utilisateurDao.getUtilisateurByEmail(email);
+		return null;
+
+//		return utilisateurDao.getUtilisateurByEmail(email);
+	}
+
+	@Override
+	public void updateUtilisateur(UtilisateurDto utilisateurDto) throws Exception {
+//		utilisateurDao.update(utilisateur);
+		
+	}
+
+	@Override
+	public void removeUtilisateur(UtilisateurDto utilisateurDto) throws Exception {
+
+//		utilisateurDao.remove(utilisateur);
+		
+	}
+
+	@Override
+	public List<UtilisateurDto> getUtilisateurs() throws Exception {
+		return null;
+//		return utilisateurDao.getAll(Utilisateur.class);
+	}
+
+	@Override
+	public List<UtilisateurDto> getUtilisateursByVille(String ville) throws Exception {
+		return null;
+//		return utilisateurDao.getUtilisateursByVille(ville);
 	}
 
 	@Override
 	public void updateUtilisateur(Utilisateur utilisateur) throws Exception {
+		UtilisateurDao utilisateurDao = new UtilisateurDao(); 
+		utilisateurDao.update(utilisateur);
 		
-		 utilisateurDao.update(utilisateur);
-
 	}
 
-	@Override²	
-	public void removeUtilisateur(UtilisateurDto utilisateurDto) throws Exception {
-		
-		utilisateurDao.remove(utilisateur);
-
-	}
-
-	@Override
-	public List<Utilisateur> getUtilisateurs() throws Exception {
-		return utilisateurDao.getAll(Utilisateur.class);
-	}
-
-	@Override
-	public List<Utilisateur> getUtilisateursByVille(String ville) throws Exception {
-		return utilisateurDao.getUtilisateursByVille(ville);
-	}
 
 }
