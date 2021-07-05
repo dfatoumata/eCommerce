@@ -44,6 +44,7 @@ public class GestionAchatBean implements Serializable {
 		System.out.println(user.getPanier());
 		Integer qte = Integer.valueOf(quantite);
 
+		
 		ArticlePanier articlePanier = null;
 		boolean isFound = false;
 		

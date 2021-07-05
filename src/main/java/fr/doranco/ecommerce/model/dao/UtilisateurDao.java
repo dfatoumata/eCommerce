@@ -41,7 +41,7 @@ public UtilisateurDao() {
 	public List<Utilisateur> getUtilisateursByVille(String ville) throws Exception {
 		Session session = HibernateConnector.getInstance().getSession();
 		Query<Utilisateur> query = session.createQuery(
-				"SELECT u FROM Utilisateur u JOIN u.commandes c JOIN u.adresses a WHERE a.ville =:ville", Utilisateur.class);
+				"SELECT u FROM Utilisateur u WHERE u.adresses.ville =:ville", Utilisateur.class);
 		query.setParameter("ville", ville);
 		return query.getResultList();
 

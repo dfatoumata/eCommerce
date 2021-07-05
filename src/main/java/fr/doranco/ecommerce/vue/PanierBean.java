@@ -40,7 +40,6 @@ public class PanierBean implements Serializable {
 			e.printStackTrace();
 		}
 
-		user.
 		return articlePaniers;
 	}
 
