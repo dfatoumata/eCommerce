@@ -1,16 +1,13 @@
+package fr.doranco.ecommerce.main;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.hibernate.Session;
 
-
-import fr.doranco.ecommerce.entity.pojo.Adresse;
-import fr.doranco.ecommerce.entity.pojo.Commande;
-import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.entity.pojo.Params;
+import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.HibernateConnector;
-import fr.doranco.ecommerce.model.dao.IUtilisateurDao;
-import fr.doranco.ecommerce.model.dao.UtilisateurDao;
-import fr.doranco.ecommerce.utils.Dates;
+import fr.doranco.ecommerce.model.dao.ParamsDao;
+import fr.doranco.ecommerce.utils.GenerateKey;
 
 
 public class Main {
@@ -21,6 +18,27 @@ public class Main {
 
 		session = HibernateConnector.getInstance().getSession();
 			System.out.println(session);
+			
+//			String algorithm = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
+//            SecretKey cleCryptage = null;
+//			try {
+//				cleCryptage = GenerateKey.getKey(algorithm, 56);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//            byte[] cleCryptageBytes = cleCryptage.getEncoded();
+//            Params params = new Params();
+//
+//            params.setCleCrypatage(cleCryptageBytes);
+//            ParamsDao paramsDao = new ParamsDao();
+//
+//            try {
+//				paramsDao.add(params);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 //	IUtilisateurDao userDao = new UtilisateurDao();
 //
@@ -35,7 +53,7 @@ public class Main {
 //	SecretKey cleCryptage = new SecretKeySpec(user.getPassword(), algorithm);
 //	byte[] passwordCrypte = user.getPassword();
 //	String passwordDecrypte = fr.doranco.ecommerce.utils.CryptageDesPbeBlowfish.decrypt(algorithm, passwordCrypte, cleCryptage);
-//	
+	
 //	new Adresse(6, "Boulevard Blaise Pascal", "Rennes", "35000");
 //	
 //	Utilisateur Utilisateur = new Utilisateur("Mme","Fatou", "Diarra", Dates.convertStringToDateUtil("18/06/1940"), true, "C","dfatoumata57@yahoo.fr",passwordCrypte);

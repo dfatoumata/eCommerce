@@ -58,7 +58,7 @@ public class CartePaiement implements Serializable {
 	}
 
 	public CartePaiement(Integer id, @NotEmpty String nomProprietaire, @NotEmpty String prenomProprietaire,
-			@NotEmpty Integer numero, @NotNull Date dateFinValidite, @NotEmpty String cryptogramme,
+			@NotEmpty byte[] numero, @NotNull Date dateFinValidite, @NotEmpty byte[] cryptogramme,
 			Utilisateur utilisateur) {
 		this.id = id;
 		this.nomProprietaire = nomProprietaire;
@@ -93,11 +93,11 @@ public class CartePaiement implements Serializable {
 		this.prenomProprietaire = prenomProprietaire;
 	}
 
-	public Integer getNumero() {
+	public byte[] getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(byte[] numero) {
 		this.numero = numero;
 	}
 
@@ -109,11 +109,11 @@ public class CartePaiement implements Serializable {
 		this.dateFinValidite = dateFinValidite;
 	}
 
-	public String getCryptogramme() {
+	public byte[] getCryptogramme() {
 		return cryptogramme;
 	}
 
-	public void setCryptogramme(String cryptogramme) {
+	public void setCryptogramme(byte[] cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
 

@@ -3,19 +3,24 @@ package fr.doranco.ecommerce.entity.dto;
 public class CartePaiementDto {
 
 	private String id;
-	private String titulaire;
+	private String nomProprietaire;
+	private String prenomProprietaire;
 	private String numero;
-	private String dateValidite;
+	private String dateFinValidite;
 	private String cryptogramme;
 	
 	public CartePaiementDto() {
 	}
 
-	public CartePaiementDto(String titulaire, String numero, String dateValidite, String cryptogramme) {
+	public CartePaiementDto(String id, String nomProprietaire, String prenomProprietaire, String numero,
+			String dateFinValidite, String cryptogramme) {
+		super();
+		this.id = id;
+		this.nomProprietaire = nomProprietaire;
+		this.prenomProprietaire = prenomProprietaire;
 		this.numero = numero;
-		this.dateValidite = dateValidite;
+		this.dateFinValidite = dateFinValidite;
 		this.cryptogramme = cryptogramme;
-		this.titulaire = titulaire;
 	}
 
 	public String getId() {
@@ -26,12 +31,20 @@ public class CartePaiementDto {
 		this.id = id;
 	}
 
-	public String getTitulaire() {
-		return titulaire;
+	public String getNomProprietaire() {
+		return nomProprietaire;
 	}
 
-	public void setTitulaire(String titulaire) {
-		this.titulaire = titulaire;
+	public void setNomProprietaire(String nomProprietaire) {
+		this.nomProprietaire = nomProprietaire;
+	}
+
+	public String getPrenomProprietaire() {
+		return prenomProprietaire;
+	}
+
+	public void setPrenomProprietaire(String prenomProprietaire) {
+		this.prenomProprietaire = prenomProprietaire;
 	}
 
 	public String getNumero() {
@@ -42,12 +55,12 @@ public class CartePaiementDto {
 		this.numero = numero;
 	}
 
-	public String getDateValidite() {
-		return dateValidite;
+	public String getDateFinValidite() {
+		return dateFinValidite;
 	}
 
-	public void setDateValidite(String dateValidite) {
-		this.dateValidite = dateValidite;
+	public void setDateFinValidite(String dateValidite) {
+		this.dateFinValidite = dateValidite;
 	}
 
 	public String getCryptogramme() {
@@ -57,4 +70,6 @@ public class CartePaiementDto {
 	public void setCryptogramme(String cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
+	
+	
 }
