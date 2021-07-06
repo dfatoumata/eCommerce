@@ -4,10 +4,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
-import fr.doranco.ecommerce.entity.dto.UtilisateurDto;
 import fr.doranco.ecommerce.entity.pojo.CartePaiement;
 import fr.doranco.ecommerce.entity.pojo.Params;
-import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.CartePaiementDao;
 import fr.doranco.ecommerce.model.dao.ICartePaiementDao;
@@ -17,6 +15,8 @@ import fr.doranco.ecommerce.utils.Dates;
 
 public class CartePaiementMetier implements ICartePaiementMetier {
     ICartePaiementDao cartePaiementDao = new CartePaiementDao();
+    
+    
 	@Override
 	public void addCartePaiement(CartePaiementDto cartePaiementDto) throws Exception {
 		CartePaiement cartePaiement = new CartePaiement();
@@ -31,14 +31,24 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		
 		byte[] numeroCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, cartePaiementDto.getNumero(), key);
 		cartePaiement.setNumero(numeroCrypte);
-		byte[] numeroCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, cartePaiementDto.getNumero(), key);
-		cartePaiement.setNumero(numeroCrypte);	
 		
-		@Override
-	
+		byte[] cryptogrammeCrypte = CryptageDesPbeBlowfish.encrypt(algorithm, cartePaiementDto.getCryptogramme(), key);
+		cartePaiement.setCryptogramme(cryptogrammeCrypte);
+		
+		cartePaiement.setNomProprietaire(cartePaiementDto.getNomProprietaire());
+		
+		cartePaiement.setPrenomProprietaire(cartePaiementDto.getPrenomProprietaire());
+		
+		cartePaiement.setDateFinValidite(Dates.convertStringToDateUtil(cartePaiementDto.getDateFinValidite()));
 		
 		cartePaiementDao.add(cartePaiement);
 		
+		
+		
+		
+	
+	
+
 	}
 
 	@Override
