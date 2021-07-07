@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.ecommerce.entity.dto.ArticlePanierDto;
 import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
@@ -18,7 +17,6 @@ import fr.doranco.ecommerce.metier.IPanierMetier;
 import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.PanierMetier;
 import fr.doranco.ecommerce.metier.UtilisateurMetier;
-import fr.doranco.ecommerce.model.dao.PanierDao;
 
 @ManagedBean(name = "gestionAchatBean")
 @SessionScoped
@@ -44,10 +42,9 @@ public class GestionAchatBean implements Serializable {
 		System.out.println(user.getPanier());
 		Integer qte = Integer.valueOf(quantite);
 
-		
 		ArticlePanier articlePanier = null;
 		boolean isFound = false;
-		
+
 		for (ArticlePanier ap : user.getPanier()) {
 			if (ap.getArticle().getId().equals(article.getId())) {
 				articlePanier = ap;
@@ -64,9 +61,7 @@ public class GestionAchatBean implements Serializable {
 			user.getPanier().add(newArticlePanier);
 		}
 
-		try
-
-		{
+		try {
 			userMetier.updateUtilisateur(user);
 			messageSuccess = "Article ajouté avec succès au panier";
 		} catch (Exception e1) {
@@ -77,64 +72,62 @@ public class GestionAchatBean implements Serializable {
 
 		return "";
 	}
-	
-	
-	public String ajouterAuPanier2(Article article, String quantite) {
 
-		System.out.println(user.getPanier());
-		Integer qte = Integer.valueOf(quantite);
-		ArticlePanier articlePanier = new ArticlePanier();
-		articlePanier.setArticle(article);
-		articlePanier.setUtilisateur(user);
-
-		if (user.getPanier().contains(articlePanier)) {
-			Integer oldQuantite = user.getPanier().get(user.getPanier().indexOf(articlePanier)).getQuantite();
-			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
-		}
-		Boolean IsArticleIdentiqueDansUserPanier = false;
-
-		List<ArticlePanier> articlePaniers = null;
-		try {
-			articlePaniers = panierMetier.getPanierByUser(user.getId());
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-
-		for (ArticlePanier articleP : articlePaniers) {
-
-			if (article.getId().equals(articleP.getArticle().getId())
-					&& articlePanier.getUtilisateur().getId().equals(articleP.getUtilisateur().getId())) {
-				Integer oldQuantite = articleP.getQuantite();
-				articlePanier.setQuantite(qte + oldQuantite);
-				int index = articlePaniers.indexOf(articleP);
-
-				articlePaniers.set(index, articlePanier);
-				IsArticleIdentiqueDansUserPanier = true;
-
-			}
-		}
-
-		if (!IsArticleIdentiqueDansUserPanier) {
-			articlePanier.setQuantite(qte);
-
-			articlePaniers.add(articlePanier);
-		}
-
-		try
-
-		{
-			panierMetier.updateArticlePanier(articlePanier);
-			messageSuccess = "Article ajouté avec succès au panier";
-		} catch (Exception e1) {
-
-			e1.printStackTrace();
-			return "";
-		}
-
-		return "";
-	}
-
+//	public String ajouterAuPanier2(Article article, String quantite) {
+//
+//		System.out.println(user.getPanier());
+//		Integer qte = Integer.valueOf(quantite);
+//		ArticlePanier articlePanier = new ArticlePanier();
+//		articlePanier.setArticle(article);
+//		articlePanier.setUtilisateur(user);
+//
+//		if (user.getPanier().contains(articlePanier)) {
+//			Integer oldQuantite = user.getPanier().get(user.getPanier().indexOf(articlePanier)).getQuantite();
+//			user.getPanier().get(user.getPanier().indexOf(articlePanier)).setQuantite(qte + oldQuantite);
+//		}
+//		Boolean IsArticleIdentiqueDansUserPanier = false;
+//
+//		List<ArticlePanier> articlePaniers = null;
+//		try {
+//			articlePaniers = panierMetier.getPanierByUser(user.getId());
+//		} catch (Exception e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//
+//		for (ArticlePanier articleP : articlePaniers) {
+//
+//			if (article.getId().equals(articleP.getArticle().getId())
+//					&& articlePanier.getUtilisateur().getId().equals(articleP.getUtilisateur().getId())) {
+//				Integer oldQuantite = articleP.getQuantite();
+//				articlePanier.setQuantite(qte + oldQuantite);
+//				int index = articlePaniers.indexOf(articleP);
+//
+//				articlePaniers.set(index, articlePanier);
+//				IsArticleIdentiqueDansUserPanier = true;
+//
+//			}
+//		}
+//
+//		if (!IsArticleIdentiqueDansUserPanier) {
+//			articlePanier.setQuantite(qte);
+//
+//			articlePaniers.add(articlePanier);
+//		}
+//
+//		try
+//
+//		{
+//			panierMetier.updateArticlePanier(articlePanier);
+//			messageSuccess = "Article ajouté avec succès au panier";
+//		} catch (Exception e1) {
+//
+//			e1.printStackTrace();
+//			return "";
+//		}
+//
+//		return "";
+//	}
 
 	public List<Article> getArticles() {
 

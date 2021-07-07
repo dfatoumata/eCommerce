@@ -1,5 +1,7 @@
 package fr.doranco.ecommerce.metier;
 
+import java.util.List;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -43,12 +45,6 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		
 		cartePaiementDao.add(cartePaiement);
 		
-		
-		
-		
-	
-	
-
 	}
 
 	@Override
@@ -70,6 +66,12 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		CartePaiement cartePaiement = new CartePaiement();
 		cartePaiementDao.remove(cartePaiement);
 		
+	}
+
+	@Override
+	public List<CartePaiement> getCartePaiementByUserId(Integer id) throws Exception {
+
+		return cartePaiementDao.getCartePaiementByUserId(id);
 	}
 	
 

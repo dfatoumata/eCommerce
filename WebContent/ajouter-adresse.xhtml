@@ -9,7 +9,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Ajouter une adresse de facturation</title>
+<title>Ajouter une adresse </title>
 </head>
 <body>
 	<ui:composition template="resources/template/layout.xhtml">
@@ -70,6 +70,11 @@
 							action="#{ajouterAdresseBean.ajouterAdresse()}">
 						</h:commandButton>
 					</td>
+					<td>
+					<p:button type="button" title="Ajouter une carte de paiement" value="Ajouter une carte de paiement"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="ajouter-carte-paiement" />
+								</td>
 				</tr>
 			</p>
 			<p>
