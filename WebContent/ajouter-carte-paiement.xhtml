@@ -16,7 +16,6 @@
 		<ui:define name="content">
 
 			<h:form>
-<<<<<<< HEAD
 			<table>
 				<tr>
 					<td>Nom du proprietaire :</td>
@@ -38,7 +37,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>le Numero de la carte :</td>
+					<td>Le Numero de la carte :</td>
 					<td>
 						<h:inputText id="numero" required="true"  value="#{CartePaiementBean.numero}"
 							requiredMessage="Le numero est obligatoire">
@@ -77,13 +76,8 @@
 					</td>
 					<td>
 						<h:commandButton id="ajouterCartePaiement" value="Ajouter une carte de paiement"
-							action="#{CartePaiementBean.ajouterCartePaiement}">
+							action="#{CartePaiementBean.ajouterCartePaiement()}">
 						</h:commandButton>
-							
-				<h:dataTable value="#{gestionAchatBean.getArticles()}" var="a"
-					styleClass="order-table" headerClass="order-table-header"
-					rowClasses="order-table-odd-row order-table-even-row">
-					</h:dataTable>
 			
 					</td>
 					
@@ -97,70 +91,6 @@
 				<h:outputText value="#{CartePaiementBean.messageError}"
 					style="color:red"></h:outputText>
 			</p>
-
-=======
-				<table>
-					<tr>
-						<td>Nom du proprietaire :</td>
-						<td><h:inputText id="nomProprietaire"
-								value="#{CartePaiementBean.nomProprietaire}"
-								requiredMessage="Le nom du proprietaire est obligatoire">
-								<f:validateLength minimum="2" maximum="20"></f:validateLength>
-							</h:inputText></td>
-					</tr>
-					<tr>
-						<td>Prénom du proprietaire :</td>
-						<td><h:inputText id="prenomProprietaire" required="true"
-								value="#{CartePaiementBean.prenomProprietaire}"
-								requiredMessage="Le Prénom du proprietaire est obligatoire">
-								<f:validateLength minimum="2" maximum="20"></f:validateLength>
-							</h:inputText> <h:message for="prenomProprietaire" style="color:red"></h:message>
-						</td>
-					</tr>
-					<tr>
-						<td>le Numero de la carte :</td>
-						<td><h:inputText id="numero" required="true"
-								value="#{CartePaiementBean.numero}"
-								requiredMessage="Le numero est obligatoire">
-								<f:validateLength minimum="16" maximum="16"></f:validateLength>
-							</h:inputText> <h:message for="numero" style="color:red"></h:message></td>
-					</tr>
-					<tr>
-						<td>Date de fin de validité</td>
-						<td><h:inputText id="dateFinValidite" required="true"
-								value="#{CartePaiementBean.dateFinValidite}"
-								requiredMessage="La date de fin de validité est obligatoire!"
-								placeholder="(jj/mm/aaaa)">
-								<f:validateLength minimum="10" maximum="10"></f:validateLength>
-							</h:inputText> <h:message for="dateFinValidite" style="color:red"></h:message>
-						</td>
-					</tr>
-						<p>
-							<tr>
-								<td><h:button id="retour" value="Retour" outcome="accueil"></h:button>
-								</td>
-								<td><h:commandButton id="ajouterCartePaiement"
-										value="Ajouter une carte de paiement"
-										action="#{CartePaiementBean.ajouterCartePaiement}">
-									</h:commandButton></td>
-
-							</tr>
-						</p>
-						<p>
-							<h:outputText value="#{CartePaiementBean.messageSuccess}"
-								style="color:green"></h:outputText>
-							<h:outputText value="#{CartePaiementBean.messageError}"
-								style="color:red"></h:outputText>
-						</p>
-						
-						<p>
-					<p:button type="button" title="Valider et Passer à la caisse" value="Valider et Passer à la caisse"
-								icon="pi pi-home" styleClass="warn-button p-mr-2"
-								outcome="validation-info-commande" />
-							</p>	
-				</table>
-			</h:form>
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 
 		</ui:define>
 	</ui:composition>

@@ -227,9 +227,7 @@ public class Commande implements Serializable {
 		return cartePaiementDefaut;
 	}
 
-	
-<<<<<<< HEAD
-=======
+
 	public void setTotalRemise(Double totalRemise) {
 		this.totalRemise = totalRemise;
 	}
@@ -250,7 +248,6 @@ public class Commande implements Serializable {
 		this.lignesCommande = lignesCommande;
 	}
 
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="

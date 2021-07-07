@@ -85,21 +85,17 @@
 			<artifactId>primefaces</artifactId>
 			<version>10.0.0</version>
 		</dependency>
-<<<<<<< HEAD
+
 <dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-=======
-
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
 			<version>1.2</version>
 		</dependency>
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 	</dependencies>
 
 	<build>

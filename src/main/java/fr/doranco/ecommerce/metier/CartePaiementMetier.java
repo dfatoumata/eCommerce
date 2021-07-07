@@ -52,12 +52,7 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		cartePaiement.setUtilisateur(utilisateur);
 		
 		cartePaiementDao.add(cartePaiement);
-<<<<<<< HEAD
-	
-
-=======
 		
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 	}
 
 
@@ -75,25 +70,35 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		cartePaiementDao.remove(cartePaiement);
 		
 	}
-
-<<<<<<< HEAD
-
-
 	@Override
 	public List<CartePaiement> getCarteById(Integer Id ) throws Exception {
 		
-		return cartePaiementDao.get(CartePaiement.class, Id);
+		return null;
+		//cartePaiementDao.get(CartePaiement.class, Id);
 	}
 
 
-
-=======
 	@Override
 	public List<CartePaiement> getCartePaiementByUserId(Integer id) throws Exception {
 
 		return cartePaiementDao.getCartePaiementByUserId(id);
 	}
->>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
+
+
+
+	@Override
+	public void addCartePaiement(CartePaiementDto cartePaiementDto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public CartePaiement getCartePaiementById(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
