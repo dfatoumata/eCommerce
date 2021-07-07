@@ -228,6 +228,29 @@ public class Commande implements Serializable {
 	}
 
 	
+<<<<<<< HEAD
+=======
+	public void setTotalRemise(Double totalRemise) {
+		this.totalRemise = totalRemise;
+	}
+
+	public void setFraisExpedition(Double fraisExpedition) {
+		this.fraisExpedition = fraisExpedition;
+	}
+
+	public void setTotalGeneral(Double totalGeneral) {
+		this.totalGeneral = totalGeneral;
+	}
+
+	public void setCartePaiementDefaut(CartePaiement cartePaiementDefaut) {
+		this.cartePaiementDefaut = cartePaiementDefaut;
+	}
+
+	public void setLignesCommande(Set<LigneCommande> lignesCommande) {
+		this.lignesCommande = lignesCommande;
+	}
+
+>>>>>>> branch 'Fatou' of https://github.com/dfatoumata/eCommerce.git
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="

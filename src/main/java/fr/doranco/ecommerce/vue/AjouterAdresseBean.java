@@ -110,13 +110,13 @@ public class AjouterAdresseBean implements Serializable {
 			
 			adresseMetier.addAdresse(adresse, user.getId());
 
-			Commande Commande = new Commande();
-			Commande.setAdresseFacturation()
-			user.getCommandes();
-			for (Commande Commande  : user.getCommandes()) {
-				Commande.setAdresseFacturation(adresse);
-			}
-			
+//			Commande Commande = new Commande();
+//			Commande.setAdresseFacturation()
+//			user.getCommandes();
+//			for (Commande Commande  : user.getCommandes()) {
+//				Commande.setAdresseFacturation(adresse);
+//			}
+//			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
