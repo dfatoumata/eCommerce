@@ -1,5 +1,8 @@
 package fr.doranco.ecommerce.entity.dto;
 
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.vue.LoginBean;
+
 public class CartePaiementDto {
 
 	private String id;
@@ -8,12 +11,13 @@ public class CartePaiementDto {
 	private String numero;
 	private String dateFinValidite;
 	private String cryptogramme;
+	private Utilisateur utilisateur;
 	
 	public CartePaiementDto() {
 	}
 
 	public CartePaiementDto(String id, String nomProprietaire, String prenomProprietaire, String numero,
-			String dateFinValidite, String cryptogramme) {
+			String dateFinValidite, String cryptogramme ,Utilisateur utilisateur) {
 		super();
 		this.id = id;
 		this.nomProprietaire = nomProprietaire;
@@ -21,14 +25,27 @@ public class CartePaiementDto {
 		this.numero = numero;
 		this.dateFinValidite = dateFinValidite;
 		this.cryptogramme = cryptogramme;
+		this.utilisateur= utilisateur;
 	}
+	
+
 
 	public String getId() {
 		return id;
 	}
+	
+	
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public String getNomProprietaire() {

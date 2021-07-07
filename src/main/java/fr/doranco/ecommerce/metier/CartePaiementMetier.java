@@ -1,15 +1,19 @@
 package fr.doranco.ecommerce.metier;
 
+import java.util.List;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
 import fr.doranco.ecommerce.entity.pojo.CartePaiement;
 import fr.doranco.ecommerce.entity.pojo.Params;
+import fr.doranco.ecommerce.entity.pojo.Utilisateur;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.CartePaiementDao;
 import fr.doranco.ecommerce.model.dao.ICartePaiementDao;
 import fr.doranco.ecommerce.model.dao.ParamsDao;
+import fr.doranco.ecommerce.model.dao.UtilisateurDao;
 import fr.doranco.ecommerce.utils.CryptageDesPbeBlowfish;
 import fr.doranco.ecommerce.utils.Dates;
 
@@ -18,7 +22,7 @@ public class CartePaiementMetier implements ICartePaiementMetier {
     
     
 	@Override
-	public void addCartePaiement(CartePaiementDto cartePaiementDto) throws Exception {
+	public void addCartePaiement(CartePaiementDto cartePaiementDto,Integer idUtilisateur) throws Exception {
 		CartePaiement cartePaiement = new CartePaiement();
 	
 		ParamsDao paramsDao = new ParamsDao();
@@ -41,21 +45,17 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		
 		cartePaiement.setDateFinValidite(Dates.convertStringToDateUtil(cartePaiementDto.getDateFinValidite()));
 		
+	    UtilisateurDao utilisateurDao = new UtilisateurDao();
+		
+		Utilisateur utilisateur = utilisateurDao.get(Utilisateur.class, idUtilisateur);
+		
+		cartePaiement.setUtilisateur(utilisateur);
+		
 		cartePaiementDao.add(cartePaiement);
-		
-		
-		
-		
-	
 	
 
 	}
 
-	@Override
-	public CartePaiement getCartePaiementById(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return cartePaiementDao.get(CartePaiement.class, id);
-	}
 
 
 	@Override
@@ -71,6 +71,17 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		cartePaiementDao.remove(cartePaiement);
 		
 	}
+
+
+
+	@Override
+	public List<CartePaiement> getCarteById(Integer Id ) throws Exception {
+		
+		return cartePaiementDao.get(CartePaiement.class, Id);
+	}
+
+
+
 	
 
 }

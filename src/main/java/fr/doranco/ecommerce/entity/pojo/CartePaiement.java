@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import fr.doranco.ecommerce.vue.LoginBean;
+
 @Entity
 @Table(name = "carte_paiement", catalog = "ecommerce_db")
 public class CartePaiement implements Serializable {
@@ -27,15 +29,15 @@ public class CartePaiement implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "nom_proprietaire", length = 25, nullable = false)
 	private String nomProprietaire;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "prenom_proprietaire", length = 25, nullable = false)
 	private String prenomProprietaire;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "numero", length = 25, nullable = false)
 	private byte[] numero;
 
@@ -44,7 +46,7 @@ public class CartePaiement implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateFinValidite;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "cryptogramme", length = 40, nullable = false)
 	private byte[] cryptogramme;
 	
@@ -52,13 +54,15 @@ public class CartePaiement implements Serializable {
 	@JoinColumn(name = "utilisateur_id", nullable = false)
 	private Utilisateur utilisateur;
 	
+
+	
 	public CartePaiement() {
 		System.out.println("CartePaiement");
 
 	}
 
-	public CartePaiement(Integer id, @NotEmpty String nomProprietaire, @NotEmpty String prenomProprietaire,
-			@NotEmpty byte[] numero, @NotNull Date dateFinValidite, @NotEmpty byte[] cryptogramme,
+	public CartePaiement(Integer id, @NotNull String nomProprietaire, @NotNull String prenomProprietaire,
+			@NotNull byte[] numero, @NotNull Date dateFinValidite, @NotNull byte[] cryptogramme,
 			Utilisateur utilisateur) {
 		this.id = id;
 		this.nomProprietaire = nomProprietaire;

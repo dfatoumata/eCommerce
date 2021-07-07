@@ -227,6 +227,7 @@ public class Commande implements Serializable {
 		return cartePaiementDefaut;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="

@@ -47,6 +47,16 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Cryptogramme :</td>
+					<td>
+						<h:inputText id="cryptogramme" required="true"  value="#{CartePaiementBean.cryptogramme}"
+							requiredMessage="Le cryptogramme est obligatoire">
+							<f:validateLength minimum="3" maximum="3"></f:validateLength>
+						</h:inputText>
+						<h:message for="cryptogramme" style="color:red"></h:message>
+					</td>
+				</tr>
+				<tr>
 					<td>Date de fin de validité</td>
 					<td>
 						<h:inputText id="dateFinValidite" required="true"  value="#{CartePaiementBean.dateFinValidite}"
@@ -57,7 +67,7 @@
 						<h:message for="dateFinValidite" style="color:red"></h:message>
 					</td>
 				</tr>
-				<tr>
+				
 					
 			<p>
 				<tr>
@@ -68,17 +78,25 @@
 						<h:commandButton id="ajouterCartePaiement" value="Ajouter une carte de paiement"
 							action="#{CartePaiementBean.ajouterCartePaiement}">
 						</h:commandButton>
+							
+				<h:dataTable value="#{gestionAchatBean.getArticles()}" var="a"
+					styleClass="order-table" headerClass="order-table-header"
+					rowClasses="order-table-odd-row order-table-even-row">
+					</h:dataTable>
+			
 					</td>
 					
 				</tr>
 			</p>
+			</table>
+			</h:form>
 			<p>
 				<h:outputText value="#{CartePaiementBean.messageSuccess}"
 					style="color:green"></h:outputText>
 				<h:outputText value="#{CartePaiementBean.messageError}"
 					style="color:red"></h:outputText>
 			</p>
-	
+
 
 		</ui:define>
 	</ui:composition>

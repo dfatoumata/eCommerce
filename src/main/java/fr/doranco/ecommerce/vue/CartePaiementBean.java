@@ -1,30 +1,32 @@
 package fr.doranco.ecommerce.vue;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
 import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.pojo.Article;
 import fr.doranco.ecommerce.entity.pojo.CartePaiement;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
+import fr.doranco.ecommerce.metier.ArticleMetier;
+import fr.doranco.ecommerce.metier.CartePaiementMetier;
+import fr.doranco.ecommerce.metier.IArticleMetier;
+import fr.doranco.ecommerce.metier.ICartePaiementMetier;
 import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.UtilisateurMetier;
 
-public class CartePaiementBean {
 
-	
 
-	private String id;
-	private String nomProprietaire;
-	private String prenomProprietaire;
-	private String numero;
-	private String dateFinValidite;
-	private String cryptogramme;
 	@ManagedBean(name = "CartePaiementBean")
 	@SessionScoped
-	public class AjouterAdresseBean implements Serializable {
+	public class CartePaiementBean {
+	
+	
 
 		private static final long serialVersionUID = 1L;
 
@@ -45,8 +47,12 @@ public class CartePaiementBean {
 	    
 	    @ManagedProperty(name = "cryptogramme", value = "")
 		private String cryptogramme;
+	    
+		Utilisateur user = LoginBean.getConnectedUser();
+	  
+	
 
-		public AjouterAdresseBean() {
+		public CartePaiementBean() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
@@ -122,28 +128,48 @@ public class CartePaiementBean {
 			this.messageError = messageError;
 		}
 
-		public String ajouterCartePaiement(CartePaiement cartePaiement) {
-			Utilisateur user = LoginBean.getConnectedUser();
-			user.getCartePaiements().add(cartePaiement);
+		public String ajouterCartePaiement() {
 
-			IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
-			try {
-				utilisateurMetier.updateUtilisateur(user);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "";
-			}
+			
+			CartePaiementDto carte = new CartePaiementDto();
+			carte.setNomProprietaire(nomProprietaire);
+			carte.setPrenomProprietaire(prenomProprietaire);
+			carte.setNumero(numero);
+			carte.setCryptogramme(cryptogramme);
+			carte.setDateFinValidite(dateFinValidite);
+			carte.setUtilisateur(user);
+			
+		ICartePaiementMetier carteM = new CartePaiementMetier();
+		
+		try {
+			carteM.addCartePaiement(carte, user.getId());
+			this.messageSuccess = "Carte ajouté avec succès.";
+		} catch (Exception e) {
+			this.messageError = "Erreur technique lors de l'ajout de la carte de paiement !\n";
+			e.printStackTrace();
+		}
+			
+		
 			return "";
 		}
 	    
 	    
-	    
-	    
+		public List<CartePaiement> getCartePaiement() {
+
+			ICartePaiementMetier carteMetier = new CartePaiementMetier();
+
+			List<CartePaiement> cartes = new ArrayList<CartePaiement>();
+			try {
+				cartes = carteMetier.getCartes();
+			} catch (Exception e) {
+				messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
+				e.printStackTrace();
+			}
+
+			return cartes;
+		}
 	    
 	}
-	    
-}
 
 
 
