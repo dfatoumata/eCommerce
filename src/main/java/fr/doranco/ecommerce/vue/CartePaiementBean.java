@@ -20,127 +20,119 @@ import fr.doranco.ecommerce.metier.ICartePaiementMetier;
 import fr.doranco.ecommerce.metier.IUtilisateurMetier;
 import fr.doranco.ecommerce.metier.UtilisateurMetier;
 
+@ManagedBean(name = "CartePaiementBean")
+@SessionScoped
+public class CartePaiementBean {
 
+	private static final long serialVersionUID = 1L;
 
-	@ManagedBean(name = "CartePaiementBean")
-	@SessionScoped
-	public class CartePaiementBean {
-	
-	
+	@ManagedProperty(name = "id", value = "")
+	private String id;
 
-		private static final long serialVersionUID = 1L;
+	@ManagedProperty(name = "nomProprietaire", value = "")
+	private String nomProprietaire;
 
-		@ManagedProperty(name = "id", value = "")
-		private String id;
-		
-	    @ManagedProperty(name = "nomProprietaire", value = "")
-	    private String nomProprietaire;
-	    
-	    @ManagedProperty(name = "prenomProprietaire", value = "")
-	    private String prenomProprietaire;
-	    
-	    @ManagedProperty(name = "numero", value = "")
-		private String numero;
-	    
-	    @ManagedProperty(name = "dateFinValidite", value = "")
-		private String dateFinValidite;
-	    
-	    @ManagedProperty(name = "cryptogramme", value = "")
-		private String cryptogramme;
-	    
-		Utilisateur user = LoginBean.getConnectedUser();
-	  
-	
+	@ManagedProperty(name = "prenomProprietaire", value = "")
+	private String prenomProprietaire;
 
-		public CartePaiementBean() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
+	@ManagedProperty(name = "numero", value = "")
+	private String numero;
 
-		public String getId() {
-			return id;
-		}
+	@ManagedProperty(name = "dateFinValidite", value = "")
+	private String dateFinValidite;
 
-		public void setId(String id) {
-			this.id = id;
-		}
+	@ManagedProperty(name = "cryptogramme", value = "")
+	private String cryptogramme;
 
-		public String getNomProprietaire() {
-			return nomProprietaire;
-		}
+	Utilisateur user = LoginBean.getConnectedUser();
 
-		public void setNomProprietaire(String nomProprietaire) {
-			this.nomProprietaire = nomProprietaire;
-		}
+	public CartePaiementBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-		public String getPrenomProprietaire() {
-			return prenomProprietaire;
-		}
+	public String getId() {
+		return id;
+	}
 
-		public void setPrenomProprietaire(String prenomProprietaire) {
-			this.prenomProprietaire = prenomProprietaire;
-		}
+	public void setId(String id) {
+		this.id = id;
+	}
 
-		public String getNumero() {
-			return numero;
-		}
+	public String getNomProprietaire() {
+		return nomProprietaire;
+	}
 
-		public void setNumero(String numero) {
-			this.numero = numero;
-		}
+	public void setNomProprietaire(String nomProprietaire) {
+		this.nomProprietaire = nomProprietaire;
+	}
 
-		public String getDateFinValidite() {
-			return dateFinValidite;
-		}
+	public String getPrenomProprietaire() {
+		return prenomProprietaire;
+	}
 
-		public void setDateFinValidite(String dateFinValidite) {
-			this.dateFinValidite = dateFinValidite;
-		}
+	public void setPrenomProprietaire(String prenomProprietaire) {
+		this.prenomProprietaire = prenomProprietaire;
+	}
 
-		public String getCryptogramme() {
-			return cryptogramme;
-		}
+	public String getNumero() {
+		return numero;
+	}
 
-		public void setCryptogramme(String cryptogramme) {
-			this.cryptogramme = cryptogramme;
-		}
-		
-		@ManagedProperty(name = "messageSuccess", value = "")
-		private String messageSuccess = " ";
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-		@ManagedProperty(name = "messageError", value = "")
-		private String messageError = " ";
+	public String getDateFinValidite() {
+		return dateFinValidite;
+	}
 
-		
-		public String getMessageSuccess() {
-			return messageSuccess;
-		}
+	public void setDateFinValidite(String dateFinValidite) {
+		this.dateFinValidite = dateFinValidite;
+	}
 
-		public void setMessageSuccess(String messageSuccess) {
-			this.messageSuccess = messageSuccess;
-		}
+	public String getCryptogramme() {
+		return cryptogramme;
+	}
 
-		public String getMessageError() {
-			return messageError;
-		}
+	public void setCryptogramme(String cryptogramme) {
+		this.cryptogramme = cryptogramme;
+	}
 
-		public void setMessageError(String messageError) {
-			this.messageError = messageError;
-		}
+	@ManagedProperty(name = "messageSuccess", value = "")
+	private String messageSuccess = " ";
 
-		public String ajouterCartePaiement() {
+	@ManagedProperty(name = "messageError", value = "")
+	private String messageError = " ";
 
-			
-			CartePaiementDto carte = new CartePaiementDto();
-			carte.setNomProprietaire(nomProprietaire);
-			carte.setPrenomProprietaire(prenomProprietaire);
-			carte.setNumero(numero);
-			carte.setCryptogramme(cryptogramme);
-			carte.setDateFinValidite(dateFinValidite);
-			carte.setUtilisateur(user);
-			
+	public String getMessageSuccess() {
+		return messageSuccess;
+	}
+
+	public void setMessageSuccess(String messageSuccess) {
+		this.messageSuccess = messageSuccess;
+	}
+
+	public String getMessageError() {
+		return messageError;
+	}
+
+	public void setMessageError(String messageError) {
+		this.messageError = messageError;
+	}
+
+	public String ajouterCartePaiement() {
+
+		CartePaiementDto carte = new CartePaiementDto();
+		carte.setNomProprietaire(nomProprietaire);
+		carte.setPrenomProprietaire(prenomProprietaire);
+		carte.setNumero(numero);
+		carte.setCryptogramme(cryptogramme);
+		carte.setDateFinValidite(dateFinValidite);
+		carte.setUtilisateur(user);
+
 		ICartePaiementMetier carteM = new CartePaiementMetier();
-		
+
 		try {
 			carteM.addCartePaiement(carte, user.getId());
 			this.messageSuccess = "Carte ajouté avec succès.";
@@ -148,13 +140,11 @@ import fr.doranco.ecommerce.metier.UtilisateurMetier;
 			this.messageError = "Erreur technique lors de l'ajout de la carte de paiement !\n";
 			e.printStackTrace();
 		}
-			
-		
-			return "";
-		}
-	    
-	    
-		public List<CartePaiement> getCartePaiement() {
+
+		return "";
+	}
+
+	public List<CartePaiement> getCartePaiement() {
 
 //			ICartePaiementMetier carteMetier = new CartePaiementMetier();
 //
@@ -166,10 +156,7 @@ import fr.doranco.ecommerce.metier.UtilisateurMetier;
 //				e.printStackTrace();
 //			}
 
-			return null;
-		}
-	    
+		return null;
 	}
 
-
-
+}
