@@ -156,17 +156,17 @@ import fr.doranco.ecommerce.metier.UtilisateurMetier;
 	    
 		public List<CartePaiement> getCartePaiement() {
 
-			ICartePaiementMetier carteMetier = new CartePaiementMetier();
+//			ICartePaiementMetier carteMetier = new CartePaiementMetier();
+//
+//			List<CartePaiement> cartes = new ArrayList<CartePaiement>();
+//			try {
+//				cartes = carteMetier.getCartes();
+//			} catch (Exception e) {
+//				messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
+//				e.printStackTrace();
+//			}
 
-			List<CartePaiement> cartes = new ArrayList<CartePaiement>();
-			try {
-				cartes = carteMetier.getCartes();
-			} catch (Exception e) {
-				messageError = "Erreur technique ! Veuillez réessayer plus tard.\n" + e.getMessage();
-				e.printStackTrace();
-			}
-
-			return cartes;
+			return null;
 		}
 	    
 	}
