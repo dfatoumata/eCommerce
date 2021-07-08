@@ -55,52 +55,10 @@
 					<h:column>
 						<f:facet name="header">Definir comme adresse de Livraison</f:facet>
 						<h:commandButton value="Ajouter l'adresse de Livraison"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
+							action="#{ajouterCommandeBean.ajouterAdresseLivraison(a)}"></h:commandButton>
 					</h:column>
 				</h:dataTable>
 
-				<h:dataTable value="#{ajouterCommandeBean.getAdresses()}" var="a"
-					styleClass="order-table" headerClass="order-table-header"
-					rowClasses="order-table-odd-row order-table-even-row">
-
-
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{a.id}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Numero</f:facet>
-						<h:outputText value="#{a.numero}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Rue</f:facet>
-						<h:outputText value="#{a.rue}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ville</f:facet>
-						<h:outputText value="#{a.ville}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Code Postal</f:facet>
-						<h:outputText value="#{a.codePostal}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Definir comme adresse de facturation</f:facet>
-						<h:commandButton value="Ajouter l'adresse de facturation"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Definir comme adresse de Livraison</f:facet>
-						<h:commandButton value="Ajouter l'adresse de Livraison"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
-					</h:column>
-				</h:dataTable>
-				
 				<h4>Liste des cartes bancaires</h4>
 
 				<h:dataTable value="#{ajouterCommandeBean.getCartes()}" var="c"

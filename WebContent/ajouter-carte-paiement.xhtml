@@ -78,7 +78,10 @@
 						<h:commandButton id="ajouterCartePaiement" value="Ajouter une carte de paiement"
 							action="#{CartePaiementBean.ajouterCartePaiement()}">
 						</h:commandButton>
-			
+						
+							<p:button type="button" title="Valider et passer à la caisse" value="Valider et passer à la caisse"
+								icon="pi pi-home" styleClass="warn-button p-mr-2"
+								outcome="validation-info-commande" />
 					</td>
 					
 				</tr>

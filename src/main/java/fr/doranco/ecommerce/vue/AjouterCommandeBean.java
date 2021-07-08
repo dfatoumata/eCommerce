@@ -2,13 +2,16 @@ package fr.doranco.ecommerce.vue;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
 import fr.doranco.ecommerce.entity.pojo.CartePaiement;
 import fr.doranco.ecommerce.entity.pojo.Commande;
 import fr.doranco.ecommerce.entity.pojo.Utilisateur;
@@ -44,9 +47,66 @@ public class AjouterCommandeBean implements Serializable {
 	private String messageError = " ";
 
 	Utilisateur user = LoginBean.getConnectedUser();
+
 	Commande commande = new Commande();
 
+//	private List<Double> total_article_panier ;
+
 	public AjouterCommandeBean() {
+	}
+	public Double getTotalGenereal() {
+		Double totalGeneral = 0.0;
+		for (Double totalArticlePanier : getTotalArticlePanier()) {
+			totalGeneral += totalArticlePanier;
+
+		}
+		return totalGeneral;
+	}
+//	public Double getTotalGenereal() {
+//		Double totalGeneral = 0.0;
+//		for (Double totalArticlePanier : getTotalArticlePanier().values()) {
+//			totalGeneral += totalArticlePanier;
+//
+//		}
+//		return totalGeneral;
+//	}
+	
+//	public Map<ArticlePanier ,Double> getTotalArticlePanier() {
+//		
+//		Map<ArticlePanier ,Double> listeTotalParArticlePanier = new HashMap<ArticlePanier, Double>();
+//		for (ArticlePanier articlePanier : user.getPanier()) {
+//			Double prixRemiseCategorie = articlePanier.getArticle().getPrix()
+//					* (1 - (articlePanier.getArticle().getCategorie().getRemise() / 100));
+////			Double prixRemiseCategorie = articlePanier.getArticle().getPrix() - (articlePanier.getArticle().getPrix()
+////					* (articlePanier.getArticle().getCategorie().getRemise() / 100));
+//			Double prixRemiseArticle = prixRemiseCategorie * (1 - (articlePanier.getArticle().getRemise() / 100));
+//
+//			Double prixFinal = articlePanier.getQuantite() * prixRemiseArticle;
+//			listeTotalParArticlePanier.put(articlePanier, prixFinal);
+//
+//		}
+//		return listeTotalParArticlePanier;
+//	}
+
+	public List<Double> getTotalArticlePanier() {
+		List<Double> listeTotal = new ArrayList<Double>();
+		for (ArticlePanier articlePanier : user.getPanier()) {
+			Double prixRemiseCategorie = articlePanier.getArticle().getPrix()
+					* (1 - (articlePanier.getArticle().getCategorie().getRemise() / 100));
+//			Double prixRemiseCategorie = articlePanier.getArticle().getPrix() - (articlePanier.getArticle().getPrix()
+//					* (articlePanier.getArticle().getCategorie().getRemise() / 100));
+			Double prixRemiseArticle = prixRemiseCategorie * (1 - (articlePanier.getArticle().getRemise() / 100));
+
+			Double prixFinal = articlePanier.getQuantite() * prixRemiseArticle;
+			listeTotal.add(prixFinal);
+		}
+		return listeTotal;
+	}
+
+	public String passerCommande() {
+
+		return "";
+
 	}
 
 	public String ajouterAdresseFacturation(Adresse adresse) {

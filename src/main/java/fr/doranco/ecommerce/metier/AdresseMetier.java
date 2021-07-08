@@ -56,8 +56,8 @@ public class AdresseMetier implements IAdresseMetier {
 
 	@Override
 	public List<Adresse> getAdressesUtilisateur(Integer idUtilisateur) throws Exception {
-		//adresseDao.getAdressesUtilisateur(idUtilisateur);
-		return null;
+		
+		return adresseDao.getAdressesUtilisateur(idUtilisateur);
 	}
 
 }

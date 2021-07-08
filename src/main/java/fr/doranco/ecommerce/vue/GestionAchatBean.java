@@ -56,18 +56,10 @@ public class GestionAchatBean implements Serializable {
 			articlePanier.setQuantite(articlePanier.getQuantite() + qte);
 			user.getPanier().set(indexArticlePanier, articlePanier);
 
-			try {
-				userMetier.updateUtilisateur(user);
-				messageSuccess = "Article ajouté avec succès au panier";
-			} catch (Exception e1) {
 
-				e1.printStackTrace();
-				return "";
-			}
-			
 		} else {
 			ArticlePanier newArticlePanier = new ArticlePanier(article, Integer.valueOf(quantite));
-//			newArticlePanier.setUtilisateur(user);;
+			newArticlePanier.setUtilisateur(user);;
 			user.getPanier().add(newArticlePanier);
 //			newArticlePanier.setUtilisateur(user);;
 //			user.getPanier().add(newArticlePanier);
@@ -76,7 +68,15 @@ public class GestionAchatBean implements Serializable {
 			// Voir l'explication de Asmaa si l'utilisateur n'a pas d'article dans son panier alors faire le Add 
 		}
 
+		try {
+			userMetier.updateUtilisateur(user);
+			messageSuccess = "Article ajouté avec succès au panier";
+		} catch (Exception e1) {
 
+			e1.printStackTrace();
+			return "";
+		}
+		
 		return "";
 	}
 

@@ -9,146 +9,70 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Gestion des commandes</title>
+<title>Recaptilatif de la commande commandes</title>
 </head>
 <body>
 	<ui:composition template="resources/template/layout.xhtml">
 		<ui:define name="content">
 			<h:form>
-				<h4>Liste des adresses</h4>
+				<h4>Liste des lignes de commandes</h4>
 
-				<h:dataTable value="#{ajouterCommandeBean.getAdresses()}" var="a"
+				<h:dataTable value="#{ajouterCommandeBean.getTotalArticlePanier()}" var="p"
 					styleClass="order-table" headerClass="order-table-header"
 					rowClasses="order-table-odd-row order-table-even-row">
 
 
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{a.id}"></h:outputText>
+						<h:outputText value="#{p.id}"></h:outputText>
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Numero</f:facet>
-						<h:outputText value="#{a.numero}"></h:outputText>
+						<f:facet name="header">Nom de l'article</f:facet>
+						<h:outputText value="#{p.article.nom}"></h:outputText>
+					</h:column>
+
+
+					<h:column>
+						<f:facet name="header">Prix Unitaire</f:facet>
+						<h:outputText value="#{p.article.prix}"></h:outputText>
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Rue</f:facet>
-						<h:outputText value="#{a.rue}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ville</f:facet>
-						<h:outputText value="#{a.ville}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Code Postal</f:facet>
-						<h:outputText value="#{a.codePostal}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Definir comme adresse de facturation</f:facet>
-						<h:commandButton value="Ajouter l'adresse de facturation"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
+						<f:facet name="header">Quantité</f:facet>
+						<h:outputText value="#{p.quantite}"></h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Definir comme adresse de Livraison</f:facet>
-						<h:commandButton value="Ajouter l'adresse de Livraison"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
+						<f:facet name="header">Remise Categorie</f:facet>
+						<h:outputText value="#{p.article.categorie.remise}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Remise Article</f:facet>
+						<h:outputText value="#{p.article.remise}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total</f:facet>
+						<h:outputText
+							value="#{ajouterCommandeBean.getTotalArticlePanier()}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Suppirmer de la commande</f:facet>
+						<h:commandButton value="Suppirmer du panier"
+							action="#{panierBean.supprimerArticlePanier(p)}"></h:commandButton>
 					</h:column>
 				</h:dataTable>
-
-				<h:dataTable value="#{ajouterCommandeBean.getAdresses()}" var="a"
-					styleClass="order-table" headerClass="order-table-header"
-					rowClasses="order-table-odd-row order-table-even-row">
-
-
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{a.id}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Numero</f:facet>
-						<h:outputText value="#{a.numero}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Rue</f:facet>
-						<h:outputText value="#{a.rue}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ville</f:facet>
-						<h:outputText value="#{a.ville}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Code Postal</f:facet>
-						<h:outputText value="#{a.codePostal}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Definir comme adresse de facturation</f:facet>
-						<h:commandButton value="Ajouter l'adresse de facturation"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Definir comme adresse de Livraison</f:facet>
-						<h:commandButton value="Ajouter l'adresse de Livraison"
-							action="#{ajouterCommandeBean.ajouterAdresseFacturation(a)}"></h:commandButton>
-					</h:column>
-				</h:dataTable>
-				
-				<h4>Liste des cartes bancaires</h4>
-
-				<h:dataTable value="#{ajouterCommandeBean.getCartes()}" var="c"
-					styleClass="order-table" headerClass="order-table-header"
-					rowClasses="order-table-odd-row order-table-even-row">
-
-
-					<h:column>
-						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{c.id}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Numero</f:facet>
-						<h:outputText value="#{c.numero}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Prenom</f:facet>
-						<h:outputText value="#{c.prenomProprietaire}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Nom</f:facet>
-						<h:outputText value="#{c.nomProprietaire}"></h:outputText>
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Date d'expiration</f:facet>
-						<h:outputText value="#{c.dateFinValidite}"></h:outputText>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Cryptogramme</f:facet>
-						<h:outputText value="#{c.cryptogramme}"></h:outputText>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Definir comme Carte paiement</f:facet>
-						<h:commandButton value="Ajouter l'adresse de facturation"
-							action="#{ajouterCommandeBean.ajouterCartePaiement(c)}"></h:commandButton>
-					</h:column>
-
-				</h:dataTable>
-				
-				<p:button type="button" title="Passer la commande" value="Passer la commande"
-								icon="pi pi-home" styleClass="warn-button p-mr-2"
-								outcome="panier" />
+				<p>
+					<tr>
+						<td>Total General:</td>
+						<td><h:outputText
+								value="#{ajouterCommandeBean.getTotalGenereal()}"></h:outputText>
+						</td>
+						<td>Euro</td>
+					</tr>
+				</p>
+				<p:button type="button" title="Passer la commande"
+					value="Passer la commande" icon="pi pi-home"
+					styleClass="warn-button p-mr-2" outcome="commande-ok" />
 			</h:form>
 		</ui:define>
 	</ui:composition>
